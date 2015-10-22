@@ -12,6 +12,8 @@ http.createServer(function (req, res) {
   
 	/** send engine a dictionary of queries, etc. */ 
 	res.end(callback+'("'+engine.get_time()+'")'); //'currentTime'
+	console.log(callback+'("'+engine.get_time()+'")'); //'currentTime'
+
 
 }).listen(8081);
 
