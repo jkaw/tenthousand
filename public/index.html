@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>testAPI</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="app.js"> </script>
-<link rel="stylesheet" type="text/css" href="styles.css" />
-</head>
+	<head>
+		<title>10,000 over Iowa with chat</title>
+		<link rel="stylesheet" type="text/css" href="styles.css" />
+		<link rel="stylesheet" type="text/css" href="chatbox_styles.css" />
+	</head>
+	<body>
+		<button type="button">Want the time?</button>
+		<p id="test">change me please</p>
+		<div class="chatbox">
+			<ul id="messages"></ul>
+			<form action="">
+				<input id="m" autocomplete="off" /><button>Send</button>
+			</form>
+		</div>
 
-<body>
-<button type="button">Want the time?</button>
-<p id="test">change me please</p>
-</body>
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="app.js"> </script>
+		
+		<script>
+		var socket = io();
+		$('form').submit(function(){
+			socket.emit('chat_message', $('#m').val());
+			$('#m').val('');
+			return false;
+		});	
+		socket.on('chat_message', function(msg){
+			$('#messages').append($('<li>').text(msg));
+		});
+		</script>
+	</body>
 </html>
 
