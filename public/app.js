@@ -1,6 +1,7 @@
 var main = function(){
     $("button").click(function(){
-        $.ajax({url: "http://localhost:8081", dataType: "jsonp", success: function(result){
+		var newurl = window.location.protocol + "//" + window.location.hostname + ":8081/";
+        $.ajax({url: newurl, dataType: "jsonp", success: function(result){
             $("#test").html(result);
         }});
     });
