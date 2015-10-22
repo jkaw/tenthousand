@@ -1,0 +1,20 @@
+{
+  "name": "TenThousandServer",
+  "version": "0.1.0",
+  "dependencies": {
+    "express": "3.3.x"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "mocha": "^2.3.3"
+  },
+  "scripts":{
+	"test":"make test"
+  },
+  "licenses": [
+	{
+		"type": "GPL v2.0",
+		"url": "http://opensource.org/licenses/GPL-2.0"
+	}
+  ]
+}
