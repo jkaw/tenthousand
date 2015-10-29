@@ -5,17 +5,35 @@ module.exports = {
 	get_time: function(){
 		var currentTime = new Date();
 		return currentTime.getHours().toString() + ":" + currentTime.getMinutes().toString() + ":" + currentTime.getSeconds().toString();
-	}
+	},
 	
 	//createID returns a random GUID for use as a game ID
-	var create_ID = function() {
-    	var helper = function(s) {
-        	var p = (Math.random().toString(16)+"000000000").substr(2,8);
-        	return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;
-   		}
-    //console.log(helper() + helper(true) + helper(true) + helper());
-    return helper() + helper(true) + helper(true) + helper();
+	create_ID : function(){
+    	return call_create_ID();
+	},
+
+	validate_ID : function(id){
+		if (call_create_ID.validGames.indexOf(id) > -1){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
-	//console.log(create_ID) will print a new GUID, alternatively, uncomment 
-	//the console.log line preceding the return line in the above create_ID function
 };
+
+// stores all the valid games in a static array
+call_create_ID.validGames = [];
+
+// creates a new GUID and stores the new id in a static array
+function call_create_ID(){
+	var id = helper_create_ID() + helper_create_ID(true) + helper_create_ID(true) + helper_create_ID();
+	call_create_ID.validGames.push(id);
+	return id;
+};
+
+// helper function for the create_ID function
+var helper_create_ID = function(s) {
+	var p = (Math.random().toString(16)+"000000000").substr(2,8);
+	return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;
+}
