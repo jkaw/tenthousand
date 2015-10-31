@@ -1,7 +1,15 @@
-var http = require('http');
+// Load the Engine teams code
 var engine = require('./engine');
 
-http.createServer(function (req, res) {
+// Load the Real-time signalling code
+var ten_thousand_socket = require('./ten_thousand_socket');
+
+// Set up the api server
+var port = 8081;
+
+var http = require('http');
+
+var server = http.createServer(function (req, res) {
 
 	var dictionary = require('url').parse(req.url, true);
 	var callback = dictionary.query.callback;
@@ -15,7 +23,10 @@ http.createServer(function (req, res) {
 	console.log(callback+'("'+engine.get_time()+'")'); //'currentTime'
 
 
-}).listen(8081);
+}).listen(port);
 
-console.log('Server running on port 8081.');
+// This sets up the websocket connections
+ten_thousand_socket.set_up_socket(server);
+
+console.log('API server running on port '+port+'.');
 
