@@ -1,21 +1,14 @@
 # tenthousand
 The official code base for 10,000 over Iowa
 
-Web Server
+Server-Side
 =========
-A simple webserver for serving files for 10,000 over Iowa
+A simple server for serving files and responding to api calls for 10,000 over Iowa
 
 ## Usage
-node my_web_server.js
+node our_server.js
 
-
-API Server
-=========
-A simple server for processing REST requests for the server for 10,000 over Iowa
-
-## Usage
-node my_api_server.js
-
+open http://localhost:8080/static/index.html in a browser
 
 
 Engine
@@ -25,7 +18,7 @@ A library providing server utilities for 10,000 over Iowa's backend server
 
 ## Usage
 
-  var engine = require('engine')
+  var engine = require('our_engine')
       currentTimeString = engine.get_time();
 
   console.log(currentTimeString);
