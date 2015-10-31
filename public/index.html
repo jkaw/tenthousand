@@ -1,35 +1,42 @@
 <!DOCTYPE html>
+<!-- This is the basic entry point into the application it is maintained by the ui team -->
 <html>
 	<head>
-		<title>10,000 over Iowa with chat</title>
+		<title>10,000 Over Iowa</title>
 		<link rel="stylesheet" type="text/css" href="styles.css" />
 		<link rel="stylesheet" type="text/css" href="chatbox_styles.css" />
 	</head>
 	<body>
-		<button type="button">Want the time?</button>
-		<p id="test">change me please</p>
+		<div id="get_time">
+			<button type="button">Want the time?</button>
+			<p id="test">change me please</p>
+		</div>
+
+		<!-- Sample for registering the game id --> 
+		<div id="game_id_box">
+			<form action="">
+				<input id="register_id" autocomplete="off" /><button>Register</button>
+			</form>
+			<div id="response"></div>
+		</div>
+
+		<!-- This is a div for handling chat messages --> 
 		<div class="chatbox">
 			<ul id="messages"></ul>
 			<form action="">
-				<input id="m" autocomplete="off" /><button>Send</button>
+				<input id="new_message" autocomplete="off" /><button>Send</button>
 			</form>
 		</div>
 
+		<!-- Load scripts last to improve performance -->
+		<!-- socket library -->
 		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<!-- jquery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="app.js"> </script>
-		
-		<script>
-		var socket = io();
-		$('form').submit(function(){
-			socket.emit('chat_message', $('#m').val());
-			$('#m').val('');
-			return false;
-		});	
-		socket.on('chat_message', function(msg){
-			$('#messages').append($('<li>').text(msg));
-		});
-		</script>
+		<!-- ui team code -->
+		<script src="ui_code.js"></script>
+		<!-- real-time code -->
+		<script src="socket_code.js"></script>
 	</body>
 </html>
 
