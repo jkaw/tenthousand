@@ -3,10 +3,10 @@
 // It is maintained by the API team
 
 // Load the Engine teams code
-var engine = require('./our_engine');
+var engine = require('./engine/our_engine');
 
 // Load the Real-time signalling code
-var our_socket = require('./our_socket');
+var our_socket = require('./socket/our_socket');
 
 // Set up the http server
 var port = 8080;
@@ -17,11 +17,11 @@ var http = require('http').Server(app);
 
 
 //URLs that start with /static/ get files returned from the public subdirectory
-app.get('/static/*',function(req,res){
+app.get('/ui/*',function(req,res){
 	var dictionary = require('url').parse(req.url, true);
-	var pathname = dictionary.pathname.substring(7);
+	var pathname = dictionary.pathname.substring(3);
 	console.log("Static:     requested: "+pathname);
-	res.sendFile(__dirname + '/public'+pathname);
+	res.sendFile(__dirname + '/ui'+pathname);
 });
 
 //URLs that start with /api/ get data returned from the engine module 
@@ -53,7 +53,7 @@ app.get('/api/*',function(req,res){
 
 //Basic redirect for launching if anythin else is accessed
 app.get('/*',function(req,res){
-	res.redirect('/static/index.html');
+	res.redirect('/ui/index.html');
 });
 
 
