@@ -3,13 +3,12 @@
 module.exports = {
 	//get_time returns the system's current time
 	get_time: function(){
-		var currentTime = new Date();
-		return currentTime.getHours().toString() + ":" + currentTime.getMinutes().toString() + ":" + currentTime.getSeconds().toString();
+		return call_get_time();
 	},
-	
+
 	//createID returns a random GUID for use as a game ID
 	create_ID : function(){
-    	return call_create_ID();
+		return call_create_ID();
 	},
 
 	validate_ID : function(id){
@@ -37,6 +36,15 @@ var helper_create_ID = function(s) {
 	var p = (Math.random().toString(16)+"000000000").substr(2,8);
 	return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;
 }
+
+var call_get_time = function() {
+	var currentTime = new Date();
+	return currentTime.getHours().toString()
+		+ ":" + currentTime.getMinutes().toString()
+		+ ":" + currentTime.getSeconds().toString();
+};
+
+console.log(call_get_time());
 
 //Proposed game state functions and objects follow:
 
@@ -75,7 +83,7 @@ var player6 = new player("yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy",
 	"Player 1", "red", true);
 
 //creates new game object
-function game(gameID, gameCreator, listOfPlayers, turnLimit, whoseTurn, currentTime) {
+function game(gameID, gameCreator, listOfPlayers, turnLimit, startTime, whoseTurn, currentTime) {
 	//gameID randomly created when player creates new game, or specified when player joins game
 	this.gameID = gameID;
 	//playerID of the player who created this game
@@ -86,14 +94,45 @@ function game(gameID, gameCreator, listOfPlayers, turnLimit, whoseTurn, currentT
 	this.listOfPlayers = listOfPlayers;
 	//time limit specified by gameCreator for maximum turn length
 	this.turnLimit = turnLimit;
+	//the time the game was started at - started playing, NOT time at which game was created
+	this.startTime = startTime;
 	//playerID of the player whose turn it is now
 	this.whoseTurn = whoseTurn;
-	this.currentTime = currentTime;
+	this.currentTime = call_get_time();
 }
 
-var game1 = new game("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+//var name should be gameID with all dashes replaced with underscores
+var xxxxxxxx_xxxx_xxxx_xxxx_xxxxxxxxxxxx = new game("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
 	player1, [player1, player2, player3, player4, player5], 3.5, player1);
 
-var game2 = new game("yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy",
+//var name should be gameID with all dashes replaced with underscores
+var yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy = new game("yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy",
 	player6, [player6], 5.0, player6);
+
+var createGame = function(playerID, turnLimit) {
+	//will initialize a game object and transition creator to "join game" lobby,
+	//where other players will appear when they submit appropriate gameID
+	//will also declare gameID to the creator so others can join
+}
+
+var startGame = function(game) {
+	var theStartTime = call_get_time();
+	game.startTime = theStartTime;
+	console.log("The start time: " + theStartTime);
+	var theTurnLimit = yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy.turnLimit;
+	console.log(theTurnLimit);
+	return theStartTime;
+}
+
+var advanceTurn = function(game) {
+	var currentPlayer = game.whoseTurn;
+	console.log("Current time: " + call_get_time());
+	if (game.startTime === game.currentTime) {
+		currentPlayer = game.listOfPlayers[0];
+	}
+	console.log("Current player: " + currentPlayer);
+}
+
+startGame("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy");
+advanceTurn("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy");
 
