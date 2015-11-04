@@ -13,9 +13,20 @@
 		</div>
 
 		<!-- Sample for registering the game id --> 
-		<div id="game_id_box">
+		<div id="create_game_box">
 			<form action="">
-				<input id="register_id" autocomplete="off" /><button>Register</button>
+				<input id="user_id" autocomplete="off" />
+				<button>Create Game</button>
+			</form>
+			<div id="response"></div>
+		</div>
+
+		<!-- Sample for registering the game id --> 
+		<div id="join_game_box">
+			<form action="">
+				<input id="game_id" autocomplete="off" />
+				<input id="user_id" autocomplete="off" />
+				<button>Join Game</button>
 			</form>
 			<div id="response"></div>
 		</div>
@@ -37,6 +48,8 @@
 		<script src="/ui/js/ui_code.js"></script>
 		<!-- real-time code -->
 		<script src="/ui/js/socket_code.js"></script>
+		<!-- api code -->
+		<script src="/ui/js/api_code.js"></script>
 	</body>
 </html>
 

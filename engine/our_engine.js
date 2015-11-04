@@ -6,6 +6,75 @@ module.exports = {
 		var currentTime = new Date();
 		return currentTime.getHours().toString() + ":" + currentTime.getMinutes().toString() + ":" + currentTime.getSeconds().toString();
 	},
+
+	/*
+		result = { 	error:false,
+				 	errors:['none'],
+					time:<time>};
+	*/
+
+	from_api_get_time(){
+			console.log("not implemented");
+	},
+
+
+
+
+	/* 	incoming = {
+					user_id:<user_id>,
+					turn_length:<turn_length>
+				};
+
+		returns
+		result = {
+				error: <true/false>,
+			 	errors:[list of errors],
+			 	game_id: <game_id>
+			};
+*/
+
+	from_api_create_game(incoming){
+			console.log("not implemented");
+	},
+
+
+	/* 	incoming = {
+					user_id:<user_id>,
+					game_id:<game_id>,
+				};
+
+		returns
+		result = {
+				error: <true/false>,
+			 	errors:[list of errors],
+			 	players: [<player1_name>,<player2_name>,<player3_name>,<player4_name>]; //possibly null
+			};
+*/
+
+	from_api_join_game(incoming){
+			console.log("not implemented");
+	},
+
+
+
+
+	/* 	incoming = {
+					game_id:<game_id>,
+				};
+
+		returns
+		result = {
+				error: <true/false>,
+			 	errors:[list of errors],
+			 	time_started: <absolute time when game started>
+			};
+*/
+
+	from_api_start_game(incoming){
+			console.log("not implemented");
+	},
+
+
 	
 	//createID returns a random GUID for use as a game ID
 	create_ID : function(){

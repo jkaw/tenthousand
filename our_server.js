@@ -16,7 +16,7 @@ var http = require('http').Server(app);
 
 
 
-//URLs that start with /static/ get files returned from the public subdirectory
+//URLs that start with /ui/ get files returned from the public subdirectory
 app.get('/ui/*',function(req,res){
 	var dictionary = require('url').parse(req.url, true);
 	var pathname = dictionary.pathname.substring(3);
@@ -32,17 +32,18 @@ app.get('/api/*',function(req,res){
 	console.log("API   :      called : "+method);
 	console.log("               data : "+JSON.stringify(dictionary.query));
 
-	//TODO: API Team.  Parse functions and call the appropriate engine commands
 	var response;
-	if(method === "/register_game_id"){
-		response = {error:false,
-					errors:['none'],
-					game_id:dictionary.query.game_id};
+	if(method === "/api_create_game"){
+		response = engine.from_api_create_game(dictionary.query);
+	}
+	else if(method === "/api_join_game"){
+		response = engine.from_api_join_game(dictionary.query);
+	}
+	else if(method === "/api_start_game"){
+		response = engine.from_api_start_game(dictionary.query);
 	}
 	else{
-		response = {error:false,
-					errors:['none'],
-					time:engine.get_time()};
+		response = engine.from_api_get_time();
 	}
 
 	//Generic response code

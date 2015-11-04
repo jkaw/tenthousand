@@ -1,6 +1,7 @@
 //This code is maintained by Prof. Patterson
 //It provides methods to establish real-time connections with the engine
 //It also calls the ui when messages come in from the engine
+//This code should only be called from the api_code.js file
 
 
 //****************************
@@ -56,7 +57,7 @@ function socket_subscribe(game_id){
 	return false;
 }
 
-//Called by the ui when there is a chat message to send
+//Called by when there is a chat message to send
 function socket_send_chat(game_id, the_message){
 	if(socket_game_connected){
 		var data ={ socket_game_id:game_id,
