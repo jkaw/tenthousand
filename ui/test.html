@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<!-- This is the basic entry point into the application it is maintained by the ui team -->
+<html>
+	<head>
+		<title>10,000 Over Iowa</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css" />
+		<link rel="stylesheet" type="text/css" href="css/chatbox_styles.css" />
+		<!-- Load scripts first because embedded scripts are below -->
+		<!-- socket library -->
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<!-- jquery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<!-- real-time code -->
+		<script src="js/socket_code.js"></script>
+		<!-- api code -->
+		<script src="js/api_code.js"></script>
+
+		<!-- Bootstrap: because ugly webpages are offensive -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+			<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous"> 
+			<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+		<link href="css/bootstrap-switch.min.css" rel="stylesheet">
+		<script src="js/bootstrap-switch.min.js"></script>
+
+		<style>
+        	.myOutline {border:solid rgb(200,200,200) 1px}
+		</style>
+
+	</head>
+	<body>
+		<h1>API test</h1>
+
+		
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-2 col-sm-offset-6 text-left">
+					<h3>Test: <input type="checkbox" name="test-switch" checked></h3>
+					<script>
+						$("[name='test-switch']").bootstrapSwitch({"onText":"true","offText":"false"});
+					</script>
+				</div>
+			</div>
+			<div class="row myOutline">
+				<div id="api_get_time">
+					<div class="col-sm-6 text-left">
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn btn-default">api_get_time</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"></div>
+					</div>
+
+					<script>
+					 	$("div#api_get_time button").click(function(){
+							var callback_function = function(result){
+   				        		$("div#api_get_time div#response").html("<pre>"+JSON.stringify(result,null,2)+"</pre>");
+        					};
+
+							var test=$("[name='test-switch']").is(":checked");
+							api_get_time(callback_function,test);
+
+							return false; //Stop subsequent handling of this event
+		   				 });
+					</script>
+				</div>
+			</div>
+
+			<div class="row myOutline">
+				<div id="api_create_game">
+					<div class="col-sm-6 text-left">
+						<input id="user_id" autocomplete="off" placeholder="User ID"></input>
+						<input id="turn_length" autocomplete="off" placeholder="Turn Length"></input>
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn btn-default">api_create_game</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"><pre></pre></div>
+					</div>
+
+					<script>
+					 	$("div#api_create_game button").click(function(){
+							var user_id = $("div#api_create_game #user_id").val();
+							var turn_length = $("div#api_create_game #turn_length").val();
+							var callback_function = function(result){
+   				        		$("div#api_create_game div#response").html("<pre>"+JSON.stringify(result,null,2)+"</pre>");
+        					};
+
+							var test=$("[name='test-switch']").is(":checked");
+							api_create_game(user_id,turn_length,callback_function,test);
+
+							return false; //Stop subsequent handling of this event
+		   				 });
+					</script>
+				</div>
+			</div>
+
+			<div class="row myOutline">
+				<div id="api_join_game">
+					<div class="col-sm-6 text-left">
+						<input id="game_id" autocomplete="off" placeholder="Game ID"></input>
+						<input id="user_id" autocomplete="off" placeholder="User ID"></input>
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn btn-default">api_join_game</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"><pre></pre></div>
+					</div>
+
+					<script>
+					 	$("div#api_join_game button").click(function(){
+							var user_id = $("div#api_join_game #user_id").val();
+							var game_id = $("div#api_join_game #game_id").val();
+							var callback_function = function(result){
+   				        		$("div#api_join_game div#response").html("<pre>"+JSON.stringify(result,null,2)+"</pre>");
+        					};
+
+							var test=$("[name='test-switch']").is(":checked");
+							api_join_game(game_id,user_id,callback_function,test);
+
+							return false; //Stop subsequent handling of this event
+		   				 });
+					</script>
+				</div>
+			</div>
+
+			<hr/>
+
+
+			<div class="row myOutline">
+				<div id="api_subscribe_to_chat">
+					<div class="col-sm-6 text-left">
+						<input id="game_id" autocomplete="off" placeholder="Game ID"></input>
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn btn-default">api_subscribe_to_chat</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"></div>
+					</div>
+
+					<script>
+					 	$("div#api_subscribe_to_chat button").click(function(){
+							var game_id = $("div#api_subscribe_to_chat #game_id").val();
+
+							var test=$("[name='test-switch']").is(":checked");
+							api_subscribe_to_chat(game_id,test);
+
+							return false; //Stop subsequent handling of this event
+		   				 });
+					</script>
+				</div>
+			</div>
+
+
+
+			<div class="row myOutline">
+				<div id="api_start_game">
+					<div class="col-sm-6 text-left">
+						<input id="game_id" autocomplete="off" placeholder="Game ID"></input>
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn btn-default">api_start_game</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"><pre></pre></div>
+					</div>
+
+					<script>
+					 	$("div#api_start_game button").click(function(){
+							var game_id = $("div#api_start_game #game_id").val();
+							var callback_function = function(result){
+   				        		$("div#api_start_game div#response").html("<pre>"+JSON.stringify(result,null,2)+"</pre>");
+        					};
+
+							var test=$("[name='test-switch']").is(":checked");
+							api_start_game(game_id,callback_function,test);
+
+							return false; //Stop subsequent handling of this event
+		   				 });
+					</script>
+				</div>
+			</div>
+
+
+			<div class="row myOutline">
+				<div id="api_send_player_is_done">
+					<div class="col-sm-6 text-left">
+						<input id="game_id" autocomplete="off" placeholder="Game ID"></input>
+						<input id="user_id" autocomplete="off" placeholder="User ID"></input>
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn btn-default">api_send_player_is_done</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"></div>
+					</div>
+
+					<script>
+					 	$("div#api_send_player_is_done button").click(function(){
+							var game_id = $("div#api_send_player_is_done #game_id").val();
+							var user_id = $("div#api_send_player_is_done #user_id").val();
+
+							var test=$("[name='test-switch']").is(":checked");
+							api_send_player_is_done(game_id,user_id,test);
+
+							return false; //Stop subsequent handling of this event
+		   				 });
+					</script>
+				</div>
+			</div>
+
+
+			<div class="row myOutline">
+				<div id="api_send_chat">
+					<div class="col-sm-6 text-left">
+						<input id="game_id" autocomplete="off" placeholder="Game ID"></input>
+						<input id="user_id" autocomplete="off" placeholder="User ID"></input>
+						<input id="the_message" autocomplete="off" placeholder="The Message"></input>
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn btn-default">api_send_chat</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"></div>
+					</div>
+
+					<script>
+					 	$("div#api_send_chat button").click(function(){
+							var game_id = $("div#api_send_chat #game_id").val();
+							var user_id = $("div#api_send_chat #user_id").val();
+							var the_message = $("div#api_send_chat #the_message").val();
+
+							var test=$("[name='test-switch']").is(":checked");
+							api_send_chat(game_id,user_id,the_message,test);
+
+							return false; //Stop subsequent handling of this event
+		   				 });
+					</script>
+				</div>
+			</div>
+
+			<div class="row myOutline">
+				<div id="api_send_test_messages">
+					<div class="col-sm-6 text-left">
+						<input id="game_id" autocomplete="off" placeholder="Game ID"></input>
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn btn-default">api_send_test_messages</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"></div>
+					</div>
+
+					<script>
+					 	$("div#api_send_test_messages button").click(function(){
+							var game_id = $("div#api_send_test_messages #game_id").val();
+
+							var test=$("[name='test-switch']").is(":checked");
+							var ui_from_api_incoming_chat = true;
+							var ui_from_api_player_joined_game = true;
+							var ui_from_api_time_start = true;
+							var ui_from_api_timer_expired = true;
+							api_send_test_messages(	game_id,
+													ui_from_api_incoming_chat,
+													ui_from_api_player_joined_game,
+													ui_from_api_time_start,
+													ui_from_api_timer_expired,
+													test);
+
+							return false; //Stop subsequent handling of this event
+		   				 });
+					</script>
+				</div>
+			</div>
+
+			<hr/>
+
+			<div class="row myOutline">
+				<div id="ui_from_api_incoming_chat">
+					<div class="col-sm-6 text-left">
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn btn-default">ui_from_api_incoming_chat</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"></div>
+					</div>
+
+					<script>
+					 	$("div#ui_from_api_incoming_chat button").prop("disabled",true);
+						function ui_from_api_incoming_chat(who,msg){
+							var result={who:who,
+										msg:msg};
+   				        	$("div#ui_from_api_incoming_chat div#response").append("<pre>"+JSON.stringify(result,null,2)+"</pre>");
+		   				};
+					</script>
+				</div>
+			</div>
+
+			<div class="row myOutline">
+				<div id="ui_from_api_player_joined_game">
+					<div class="col-sm-6 text-left">
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn
+						btn-default">ui_from_api_player_joined_game</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"></div>
+					</div>
+
+					<script>
+					 	$("div#ui_from_api_player_joined_game button").prop("disabled",true);
+						function ui_from_api_player_joined_game(player_id){
+							var result={player_id:player_id};
+   				        	$("div#ui_from_api_player_joined_game div#response").append("<pre>"+JSON.stringify(result,null,2)+"</pre>");
+		   				};
+					</script>
+				</div>
+			</div>
+
+			<div class="row myOutline">
+				<div id="ui_from_api_time_start">
+					<div class="col-sm-6 text-left">
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn
+						btn-default">ui_from_api_time_start</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"></div>
+					</div>
+
+					<script>
+					 	$("div#ui_from_api_time_start button").prop("disabled",true);
+						function ui_from_api_time_start(time_started,turn_end){
+							var result={time_started:time_started,
+									    turn_end:turn_end};
+   				        	$("div#ui_from_api_time_start div#response").append("<pre>"+JSON.stringify(result,null,2)+"</pre>");
+		   				};
+					</script>
+				</div>
+			</div>
+
+			<div class="row myOutline">
+				<div id="ui_from_api_timer_expired">
+					<div class="col-sm-6 text-left">
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn
+						btn-default">ui_from_api_timer_expired</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"></div>
+					</div>
+
+					<script>
+					 	$("div#ui_from_api_timer_expired button").prop("disabled",true);
+						function ui_from_api_timer_expired(which_turn_ended,next_player){
+							var result={which_turn_ended:which_turn_ended,
+									    next_player:next_player};
+   				        	$("div#ui_from_api_timer_expired div#response").append("<pre>"+JSON.stringify(result,null,2)+"</pre>");
+		   				};
+					</script>
+				</div>
+			</div>
+
+			<div class="row myOutline">
+				<div id="ui_from_api_incoming_system_message">
+					<div class="col-sm-6 text-left">
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn btn-default">ui_from_api_incoming_system_message</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"></div>
+					</div>
+
+					<script>
+					 	$("div#ui_from_api_incoming_system_message button").prop("disabled",true);
+						function ui_from_api_incoming_system_message(msg){
+   				        	$("div#ui_from_api_incoming_system_message div#response").append("<pre>"+JSON.stringify(msg,null,2)+"</pre>");
+		   				};
+					</script>
+				</div>
+			</div>
+
+		</div>
+
+
+	</body>
+</html>
+

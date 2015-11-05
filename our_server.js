@@ -33,17 +33,82 @@ app.get('/api/*',function(req,res){
 	console.log("               data : "+JSON.stringify(dictionary.query));
 
 	var response;
-	if(method === "/api_create_game"){
-		response = engine.from_api_create_game(dictionary.query);
+	if(method == "/api_create_game"){
+		if(dictionary.query.test == "true"){
+			response = { 	error:false,
+							errors:[],
+							game_id: "42",
+							called_with:dictionary.query
+						};
+		}
+		else{
+			response = engine.from_api_create_game(dictionary.query);
+			if(response === undefined){
+				response = {
+							error:true,
+							errors:['Not implemented'],
+							called_with:dictionary.query
+						};
+			}
+		}
 	}
 	else if(method === "/api_join_game"){
-		response = engine.from_api_join_game(dictionary.query);
+		if(dictionary.query.test == "true"){
+			response = { 	error:false,
+							errors:[],
+							players: ["Rachel","Austin","Stefan",null],
+							called_with:dictionary.query
+						};
+		}
+		else{
+			response = engine.from_api_join_game(dictionary.query);
+			if(response === undefined){
+				response = {
+							error:true,
+							errors:['Not implemented'],
+							called_with:dictionary.query
+						};
+			}
+		}
 	}
 	else if(method === "/api_start_game"){
-		response = engine.from_api_start_game(dictionary.query);
+		if(dictionary.query.test == "true"){
+			var d =	new Date();
+			response = { 	error:false,
+							errors:[],
+							time_started: d.getTime(),
+							called_with:dictionary.query
+						};
+		}
+		else{
+			response = engine.from_api_start_game(dictionary.query);
+			if(response === undefined){
+				response = {
+							error:true,
+							errors:['Not implemented'],
+							called_with:dictionary.query
+						};
+			}
+		}
 	}
 	else{
-		response = engine.from_api_get_time();
+		if(dictionary.query.test == "true"){
+			response = { 	error:false,
+							errors:[],
+							time: "42",
+							called_with:dictionary.query
+						};
+		}
+		else{
+			response = engine.from_api_get_time(dictionary.query);
+			if(response === undefined){
+				response = {
+							error:true,
+							errors:['Not implemented'],
+							called_with:dictionary.query
+						};
+			}
+		}
 	}
 
 	//Generic response code
