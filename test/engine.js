@@ -1,5 +1,5 @@
 var should = require('chai').should(),
-    scapegoat = require('../engine'),
+    scapegoat = require('../engine/our_engine'),
     get_time = scapegoat.get_time;
 
 describe('#get_time', function() {
