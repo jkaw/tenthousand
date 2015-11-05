@@ -7,7 +7,7 @@ module.exports = {
 				 	errors:['none'],
 					time:<time>};
 	*/
-	from_api_get_time: function(){
+	from_api_get_time: function() {
 		var result = { 	error:false,
 						errors:[],
 						time: call_get_time()
@@ -32,8 +32,11 @@ module.exports = {
 			 	game_id: <game_id>
 			};
 	*/
-	from_api_create_game:function(incoming){
-		console.log("not implemented");
+	from_api_create_game:function(user_id, turn_length) {
+		var the_game_id = call_create_ID();
+		var new_game = new game(the_game_id,
+			user_id, [user_id], turn_length, "NA", user_id, sysCurrentTime);
+		console.log(the_game_id);
 	},
 	/*****************************************/
 
@@ -51,7 +54,12 @@ module.exports = {
 			 	players: [<player1_name>,<player2_name>,<player3_name>,<player4_name>]; //possibly null
 			};
 	*/
-	from_api_join_game:function(incoming){
+	from_api_join_game:function(user_id, game_id) {
+		if (validate_ID === false) {
+			console.log("Error: Invalid game ID. Please try again.");
+		} else if (validate_ID) {
+
+		}
 		console.log("not implemented");
 	},
 	/*****************************************/
@@ -174,6 +182,15 @@ var createGame = function(playerID, turnLimit) {
 	//will also declare gameID to the creator so others can join
 }
 
+var joinGame = function(userID, gameID) {
+	if (call_create_ID.validGames.indexOf(gameID) > -1) {
+		gameID.listOfPlayers.add(userID);
+		console.log("All players: " + gameID.listOfPlayers);
+	} else {
+		console.log("Error: Invalid game ID. Please try again.");
+	}
+}
+
 //Needs work
 var startGame = function(game) {
 	game.startTime = sysCurrentTime;
@@ -195,7 +212,9 @@ var advanceTurn = function(game) {
 }
 
 startGame(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
+joinGame("new player",yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy)
 advanceTurn(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
+
 
 
 
