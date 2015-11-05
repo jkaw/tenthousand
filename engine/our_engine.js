@@ -58,7 +58,7 @@ module.exports = {
 		if (validate_ID === false) {
 			console.log("Error: Invalid game ID. Please try again.");
 		} else if (validate_ID) {
-
+// code to join game
 		}
 		console.log("not implemented");
 	},
