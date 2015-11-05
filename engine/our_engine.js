@@ -1,25 +1,26 @@
 // The functions the API server sees
 
 module.exports = {
-	//get_time returns the system's current time
-	get_time: function(){
-		return call_get_time();
-	},
 
-	/*
+	/*****************************************
 		result = { 	error:false,
 				 	errors:['none'],
 					time:<time>};
 	*/
-
 	from_api_get_time: function(){
-			console.log("not implemented");
+		var result = { 	error:false,
+						errors:[],
+						time: call_get_time()
+						}
+		return result;
 	},
+	/*****************************************/
 
 
 
 
-	/* 	incoming = {
+	/*****************************************
+	 	incoming = {
 					user_id:<user_id>,
 					turn_length:<turn_length>
 				};
@@ -30,14 +31,15 @@ module.exports = {
 			 	errors:[list of errors],
 			 	game_id: <game_id>
 			};
-*/
-
+	*/
 	from_api_create_game:function(incoming){
-			console.log("not implemented");
+		console.log("not implemented");
 	},
+	/*****************************************/
 
 
-	/* 	incoming = {
+	/*****************************************
+	 	incoming = {
 					user_id:<user_id>,
 					game_id:<game_id>,
 				};
@@ -48,16 +50,17 @@ module.exports = {
 			 	errors:[list of errors],
 			 	players: [<player1_name>,<player2_name>,<player3_name>,<player4_name>]; //possibly null
 			};
-*/
-
+	*/
 	from_api_join_game:function(incoming){
-			console.log("not implemented");
+		console.log("not implemented");
 	},
+	/*****************************************/
 
 
 
 
-	/* 	incoming = {
+	/*****************************************
+	 	incoming = {
 					game_id:<game_id>,
 				};
 
@@ -67,10 +70,23 @@ module.exports = {
 			 	errors:[list of errors],
 			 	time_started: <absolute time when game started>
 			};
-*/
-
+	*/
 	from_api_start_game:function(incoming){
-			console.log("not implemented");
+		console.log("not implemented");
+	},
+	/*****************************************/
+
+
+	/*****************************************
+	 	incoming = {
+					game_id:<game_id>,
+					user_id:<user_id>,
+				};
+
+		returns null;
+	*/
+	from_api_player_is_done:function(incoming){
+		console.log("not implemented");
 	},
 
 
