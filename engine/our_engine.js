@@ -104,17 +104,19 @@ module.exports = {
 		return call_create_ID();
 	},
 
-	validate_ID : function(id){
-		if (call_create_ID.validGames.indexOf(id) > -1){
-			return true;
-		}
-		else{
-			return false;
-		}
+	validate_ID : function(id) {
+		return validate_ID_help(id);
 	}
 };
 
-
+validate_ID_help = function(id){
+	if (call_create_ID.validGames.indexOf(id) > -1){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 
 // stores all the valid games in a static array
 call_create_ID.validGames = [];
@@ -183,8 +185,8 @@ var createGame = function(playerID, turnLimit) {
 }
 
 var joinGame = function(userID, gameID) {
-	if (call_create_ID.validGames.indexOf(gameID) > -1) {
-		gameID.listOfPlayers.add(userID);
+	if (validate_ID_help(gameID) === true) { //call_create_ID.validGames.indexOf(gameID.toString()) > -1) {
+		gameID.listOfPlayers.push(userID);
 		console.log("All players: " + gameID.listOfPlayers);
 	} else {
 		console.log("Error: Invalid game ID. Please try again.");
@@ -212,7 +214,12 @@ var advanceTurn = function(game) {
 }
 
 startGame(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
-joinGame("new player",yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy)
+//fix valid id array so that id pushing does not occur only when random GUID is generated
+call_create_ID.validGames.push("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy");
+console.log("Should be true: " + validate_ID_help("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy"));
+yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy.listOfPlayers.push("test player");
+console.log("Test players: " + yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy.listOfPlayers);
+joinGame("new player", yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy)
 advanceTurn(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
 
 
