@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- This is the basic entry point into the application it is maintained by the ui team -->
+<html>
+	<head>
+		<title>10,000 Over Iowa</title>
+		<link rel="stylesheet" type="text/css" href="/ui/css/styles.css" />
+		<link rel="stylesheet" type="text/css" href="/ui/css/chatbox_styles.css" />
+	</head>
+	<body>
+		<div id="get_time">
+			<button type="button">Want the time?</button>
+			<p id="test">change me please</p>
+		</div>
+
+		<!-- Sample for registering the game id --> 
+		<div id="create_game_box">
+			<form action="">
+				<input id="user_id" autocomplete="off" />
+				<button>Create Game</button>
+			</form>
+			<div id="response"></div>
+		</div>
+
+		<!-- Sample for registering the game id --> 
+		<div id="join_game_box">
+			<form action="">
+				<input id="game_id" autocomplete="off" />
+				<input id="user_id" autocomplete="off" />
+				<button>Join Game</button>
+			</form>
+			<div id="response"></div>
+		</div>
+
+		<!-- This is a div for handling chat messages --> 
+		<div class="chatbox">
+			<ul id="messages"></ul>
+			<form action="">
+				<input id="new_message" autocomplete="off" /><button>Send</button>
+			</form>
+		</div>
+
+		<!-- Load scripts last to improve performance -->
+		<!-- socket library -->
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<!-- jquery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<!-- ui team code -->
+		<script src="/ui/js/ui_code.js"></script>
+		<!-- real-time code -->
+		<script src="/ui/js/socket_code.js"></script>
+		<!-- api code -->
+		<script src="/ui/js/api_code.js"></script>
+	</body>
+</html>
+
