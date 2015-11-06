@@ -34,18 +34,42 @@
     </div>
   </div>
 </nav>
+
 <div class="container">
   <div class="jumbotron">
+  <div id="cg-form-wrapper">
     <p>To create a game, please enter a username and click &quot;Create Game&quot;!</p>
   <form class="form-inline" role="form">
     <div class="form-group">
       <label for="user">Username:</label>
       <input type="user" class="form-control" id="user" placeholder="Enter Username">
     </div>
+      <div class="form-group">
+    <div class="dropdown">
+  <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Select Turn Time
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+ <li><a href="#30">30 Seconds</a></li>
+    <li><a href="#60">60 Seconds</a></li>
+    <li><a href="#90">90 Seconds</a></li>
+  </ul>
+</div>
+</div>
     <div class="form-group">
-    <button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="To create a game, please enter a username and click &quot;Create Game&quot!">Create Game</button>
+    <button class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="To create a game, please enter a username and click &quot;Create Game&quot!">Create Game</button>
+    </div>
   </form>
 </div>
 </div>
+</div>
+   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- ui team code -->
+  <script src="/ui/js/ui_code.js"></script>
+    <!-- real-time code -->
+  <script src="/ui/js/socket_code.js"></script>
+    <!-- api code -->
+  <script src="/ui/js/api_code.js"></script>
 </body>
 </html>

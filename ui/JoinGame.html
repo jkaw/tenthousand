@@ -36,11 +36,12 @@
 </nav>
 <div class="container">
   <div class="jumbotron">
+  <div id="jg-form">
   <p>To join a game, please enter the host's username, create your own username, and click &quot;Join Game&quot;!</p>
   <form class="form-inline" role="form">
     <div class="form-group">
-      <label for="user">Host Username:</label>
-      <input type="user" class="form-control" id="user" placeholder="Enter Host Username">
+      <label for="host">Host Username:</label>
+      <input type="host" class="form-control" id="host" placeholder="Enter Host Username">
     </div>
     <div class="form-group">
           <label for="user">Your Username:</label>
@@ -51,6 +52,15 @@
     <button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="To join a game, please enter the host's username, create your own username, and click &quot;Join Game">Join Game</button>
   </form>
 </div>
-
+</div>
+ <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- ui team code -->
+  <script src="/ui/js/ui_code.js"></script>
+    <!-- real-time code -->
+  <script src="/ui/js/socket_code.js"></script>
+    <!-- api code -->
+  <script src="/ui/js/api_code.js"></script>
 </body>
 </html>
