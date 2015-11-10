@@ -110,12 +110,12 @@ module.exports = {
 };
 
 validate_ID_help = function(id){
-	if (call_create_ID.validGames.indexOf(id) > -1){
-		return true;
+	for (i = 0; i < call_create_ID.validGames.length; i++) {
+		if (call_create_ID.validGames.indexOf(i).gameID > -1) {
+			return true;
+		}
 	}
-	else{
-		return false;
-	}
+	return false;
 }
 
 // stores all the valid games in a static array
@@ -124,7 +124,7 @@ call_create_ID.validGames = [];
 // creates a new GUID and stores the new id in a static array
 function call_create_ID(){
 	var id = helper_create_ID() + helper_create_ID(true) + helper_create_ID(true) + helper_create_ID();
-	call_create_ID.validGames.push(id);
+	call_create_ID.validGames.push(new game(id));
 	return id;
 };
 
@@ -152,13 +152,10 @@ console.log(call_get_time());
 //Proposed game state functions and objects follow:
 
 //creates new game object
-function game(gameID, gameCreator, listOfPlayers, turnLimit, startTime, whoseTurn, currentTime) {
+function game(gameID, listOfPlayers, turnLimit, startTime, whoseTurn) {
 	//gameID randomly created when player creates new game, or specified when player joins game
 	this.gameID = gameID;
-	//playerID of the player who created this game
-	//may be used to establish baseline for turn sequence, or may be unnecessary
-	this.gameCreator = gameCreator;
-	//array of all players within game - number of player objects created with specified gameID
+	//array of all player objects within game - number of player objects created with specified gameID
 	//should be in order of time joined and will determine turn sequence?
 	this.listOfPlayers = listOfPlayers;
 	//time limit specified by gameCreator for maximum turn length
@@ -167,7 +164,17 @@ function game(gameID, gameCreator, listOfPlayers, turnLimit, startTime, whoseTur
 	this.startTime = startTime;
 	//playerID of the player whose turn it is now
 	this.whoseTurn = whoseTurn;
-	this.currentTime = sysCurrentTime;
+	this.currentTime = null;
+}
+
+//creates a new player object
+function player(playerNum, playerFields) {
+	//playerID specified when player creates new game or when player joins game
+	//may need different player ID number separate from this one to allow players of same ID in different games
+	//possibly make var name concatenation of gameID and playerID
+	this.playerNum = playerNum;
+	// an array of Field objects representing the fields owned by each player
+	this.playerFields = playerFields;
 }
 
 //var name should be gameID with all dashes replaced with underscores
@@ -228,21 +235,7 @@ advanceTurn(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
 
 
 
-/* Player object likely not necessary given array of players in game object
-
-//creates a new player object
-function player(gameID, playerID, color, isTurn) {
-	//gameID randomly created when player creates new game, or specified when player joins game
-	this.gameID = gameID;
-	//playerID specified when player creates new game or when player joins game
-	//may need different player ID number separate from this one to allow players of same ID in different games
-	//possibly make var name concatenation of gameID and playerID
-	this.playerID = playerID;
-	//color assigned to player based on order joined or started: red, blue, green, yellow, purple
-	this.color = color;
-	//boolean declaring whether it is this player's turn in the game
-	this.isTurn = isTurn;
-}
+/*
 
 var player1 = new player("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
 	"Player 1", "red", true);
