@@ -68,7 +68,8 @@ module.exports = {
 		if (validate_ID === false) {
 			console.log("Error: Invalid game ID. Please try again.");
 		} else if (validate_ID) {
-// code to join game
+			joinGame(user_id, game_id);
+			return our_socket.socket_player_joined_game(game_id, user_id);
 		}
 		console.log("not implemented");
 	},
