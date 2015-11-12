@@ -110,8 +110,8 @@ module.exports = {
 };
 
 validate_ID_help = function(id){
-	for (i = 0; i < call_create_ID.validGames.length; i++) {
-		if (call_create_ID.validGames.indexOf(i).gameID > -1) {
+	for (i = 0; i < validGames.length; i++) {
+		if (validGames[i].gameID == id) {
 			return true;
 		}
 	}
@@ -119,12 +119,12 @@ validate_ID_help = function(id){
 }
 
 // stores all the valid games in a static array
-call_create_ID.validGames = [];
+var validGames = [];
 
 // creates a new GUID and stores the new id in a static array
 function call_create_ID(){
 	var id = helper_create_ID() + helper_create_ID(true) + helper_create_ID(true) + helper_create_ID();
-	call_create_ID.validGames.push(new game(id));
+	validGames.push(new game(id));
 	return id;
 };
 
