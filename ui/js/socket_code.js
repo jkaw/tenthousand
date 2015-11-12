@@ -58,15 +58,52 @@ function socket_subscribe(game_id){
 }
 
 //Called by when there is a chat message to send
-function socket_send_chat(game_id, the_message){
+function socket_send_chat(game_id, from,the_message, test){
 	if(socket_game_connected){
 		var data ={ socket_game_id:game_id,
-					from: 'Unknown person',
-					message:the_message};
+					from: from,
+					message:the_message,
+					test:test};
 		socket.emit('chat_message', data);
 	}
 	else{
-		alert('Not connected to game server');
+		alert('Not connected to game server, subscribe to chat first');
+	}
+
+}
+
+
+
+//Called by when there is a player ends a turn
+function socket_send_player_is_done(game_id,user_id,test){
+	if(socket != null){
+		var data ={ socket_game_id:game_id,
+					user_id:user_id,
+					test:test};
+		socket.emit('player_is_done', data);
+	}
+	else{
+		alert('Not connected to game server, subscribe to chat first');
+	}
+
+}
+
+
+
+
+//Called to request test messages 
+function socket_send_test_messages(game_id,ui_from_api_incoming_chat,ui_from_api_player_joined_game,ui_from_api_time_start,ui_from_api_timer_expired,test){
+	if(socket != null){
+		var data ={ game_id:game_id,
+				    ui_from_api_incoming_chat:ui_from_api_incoming_chat,
+					ui_from_api_player_joined_game:ui_from_api_player_joined_game,
+					ui_from_api_time_start:ui_from_api_time_start,
+					ui_from_api_timer_expired:ui_from_api_timer_expired,
+					test:test};
+		socket.emit('test_messages', data);
+	}
+	else{
+		alert('Not connected to game server, subscribe to chat first');
 	}
 
 }
@@ -93,7 +130,26 @@ socket.on('connect', function(){
 
 //When we receive a new chat message, display it via the ui
 socket.on('chat_message', function(msg){
-	ui_incoming_chat(msg.from,msg.message);
+	ui_from_api_incoming_chat(msg.from,msg.message);
+});
+
+
+socket.on('player_joined_game', function(msg){
+	ui_from_api_player_joined_game(msg.player_id);
+});
+
+socket.on('time_start', function(msg){
+	ui_from_api_time_start(msg.time_started,msg.turn_end);
+});
+
+socket.on('timer_expired', function(msg){
+	ui_from_api_timer_expired(msg.which_turn_ended,msg.next_player);
+});
+
+
+//When we receive a new system message, display it via the ui
+socket.on('system_message', function(msg){
+	ui_from_api_incoming_system_message(msg.message);
 });
 
 socket.on('disconnect', function(){
@@ -101,5 +157,7 @@ socket.on('disconnect', function(){
 	socket_game_disconnect();
 	console.log('Disconnected from socket server');
 });
+
+//socket.emit('system_message','im alive');
 
 

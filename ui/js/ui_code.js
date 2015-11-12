@@ -47,7 +47,7 @@ var ui_main = function(){
     });
 
 
-	// Joing Game 
+	// Join Game 
     $("div#join_game_box button").click(function(){
 		var game_id = "foo"; // needs to be set
 		var user_id = "foo"; // needs to be set
@@ -74,7 +74,7 @@ var ui_main = function(){
 
 		console.log('sending the message '+the_message);
 
-		api_send_chat(ui_game_id,the_message);
+		api_send_chat(ui_game_id,'Unknown person',the_message);
 
 		$('div.chatbox #new_message').val('');
 		ui_outgoing_chat(the_message);
@@ -98,8 +98,24 @@ function ui_from_api_incoming_chat(who,msg){
 
 //This is called by the api when a new player joins the game
 function ui_from_api_player_joined_game(player_id){
-	console.log("ui_from_api_player_joing_game: "+player+id);
+	console.log("ui_from_api_player_joined_game: "+player+id);
 }
+
+
+//This is called by the api when the engine starts the timer 
+//time_started: milliseconds since epoch then the game started
+//turn_end: time when the first turn is expected to end
+function ui_from_api_time_start(time_started,turn_end){
+	console.log("ui_from_api_time_start: time_started:"+time_started+", id:"+id);
+}
+
+//This is called by the api when the engine decides the turn is over 
+//which_turn_ended: which turn ended
+//next_player: who's turn is next 
+function ui_from_api_timer_expired(which_turn_ended,next_player){
+	console.log("ui_from_api_timer_expired: which_turn_ended:"+which_turn_ended+", next_player"+next_player);
+}
+
 
 
 
