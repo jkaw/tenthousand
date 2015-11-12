@@ -1,5 +1,7 @@
 // The functions the API server sees
 
+CircularList = require('circular-list')
+
 module.exports = {
 
 	/*****************************************
@@ -32,6 +34,14 @@ module.exports = {
 			 	game_id: <game_id>
 			};
 	*/
+	createCircularList:function(user_id){
+		var list = new CircularList
+		for(var i = 0; i < user_id.length; i++) {
+			list.append(new CircularList.Node(user_id[i]))
+		}
+		return list
+	},
+
 	from_api_create_game:function(user_id, turn_length) {
 		var the_game_id = call_create_ID();
 		var new_game = new game(the_game_id,
@@ -64,6 +74,17 @@ module.exports = {
 	},
 	/*****************************************/
 
+	get_game_instance:function(game_id){
+		//DO STUFF!!!!!
+		return null
+	},
+
+	turn_start:function(user_id, game_id){
+		game = get_game_instance(game_id)
+		game.whoseturn = user_id
+		setTimeout(game.advance_turn,game.turnlimit)
+	},
+		
 
 
 
@@ -168,6 +189,10 @@ function game(gameID, gameCreator, listOfPlayers, turnLimit, startTime, whoseTur
 	//playerID of the player whose turn it is now
 	this.whoseTurn = whoseTurn;
 	this.currentTime = sysCurrentTime;
+	function advance_turn(){
+		//TODO: Find user_id of next player
+		//TODO: Set whoseTurn equal to the user_id
+	}
 }
 
 //var name should be gameID with all dashes replaced with underscores
