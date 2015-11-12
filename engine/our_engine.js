@@ -198,7 +198,10 @@ function game(gameID, gameCreator, listOfPlayers, turnLimit, startTime, whoseTur
 		return null;
 	}
 	function get_current_player(){
-		return get_player(whoseTurn);
+		return get_player(get_current_player_id());
+	}
+	function get_current_player_id(){
+		return whoseTurn;
 	}
 	function advance_turn(){
 		//TODO: Find user_id of next player
