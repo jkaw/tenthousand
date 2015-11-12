@@ -1,5 +1,7 @@
 // The functions the API server sees
 
+CircularList = require('circular-list')
+
 module.exports = {
 
 	/*****************************************
@@ -32,6 +34,14 @@ module.exports = {
 			 	game_id: <game_id>
 			};
 	*/
+	createCircularList:function(user_id){
+		var list = new CircularList
+		for(var i = 0; i < user_id.length; i++) {
+			list.append(new CircularList.Node(user_id[i]))
+		}
+		return list
+	},
+
 	from_api_create_game:function(user_id, turn_length) {
 		var the_game_id = call_create_ID();
 		var new_game = new game(the_game_id, [user_id], turn_length, "NA", user_id);
@@ -64,6 +74,17 @@ module.exports = {
 	},
 	/*****************************************/
 
+	get_game_instance:function(game_id){
+		//DO STUFF!!!!!
+		return null
+	},
+
+	turn_start:function(user_id, game_id){
+		game = get_game_instance(game_id)
+		game.whoseturn = user_id
+		setTimeout(game.advance_turn,game.turnlimit)
+	},
+		
 
 
 
@@ -161,6 +182,7 @@ function game(gameID, listOfPlayers, turnLimit, startTime, whoseTurn) {
 	this.startTime = startTime;
 	//playerID of the player whose turn it is now
 	this.whoseTurn = whoseTurn;
+<<<<<<< HEAD
 }
 
 //creates a new player object
@@ -169,6 +191,25 @@ function player(playerNum, playerFields) {
 	this.playerNum = playerNum;
 	// an array of Field objects representing the fields owned by each player
 	this.playerFields = playerFields;
+=======
+	this.currentTime = sysCurrentTime;
+	function get_player(playerID){
+		for(i = 0; i < listOfPlayers.size; i++){
+			if(listOfPlayers[i].id == playerID){
+				return listOfPlayers[i];
+			}
+		}
+		return null;
+	}
+	function get_current_player(){
+		return get_player(whoseTurn);
+	}
+	function advance_turn(){
+		//TODO: Find user_id of next player
+		//TODO: Set whoseTurn equal to the user_id
+		this.whoseTurn = listOfPlayers.indexOf(get_current_player()).next()
+	}
+>>>>>>> 237020284d4ed78a28a8bbe5ea64f3c316be6ec8
 }
 
 //var name should be gameID with all dashes replaced with underscores
