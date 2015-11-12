@@ -1,6 +1,6 @@
 //The ui team can change this code at will
 var ui_game_id;
-
+var ui_turnTime = 60;
 var ui_main = function(){
 
 	//***************************
@@ -27,9 +27,8 @@ var ui_main = function(){
 
 
 	// Create Game 
-    $("div#cg-form-wrapper button").click(function(){
+    $("div#cg-form-wrapper button#createGame").click(function(){
 		var user_id = $("div#cg-form-wrapper #user").val(); // needs to be set
-		var turn_length = location.search.substr(1); // needs to be set
 			
 		var callback_function = function(result){
 			if(result.error == false){
@@ -40,9 +39,9 @@ var ui_main = function(){
 			else{
 				alert("We couldn't register your game because:"+result.errors[0]);
 			}
-        }});
+        };
 
-		api_create_game(user_id,turn_length,callback_function);
+		api_create_game(user_id,ui_turnTime,callback_function);
 
 		return false; //Stop subsequent handling of this event
     });
@@ -61,9 +60,9 @@ var ui_main = function(){
 			else{
 				alert("We couldn't register your game because:"+result.errors[0]);
 			}
-        }});
+        };
 
-		api_create_game(user_id,turn_length,callback_function);
+		api_join_game(game_id,user_id,callback_function,false);
 
 		return false; //Stop subsequent handling of this event
     });
@@ -83,6 +82,8 @@ var ui_main = function(){
 	});
 };	
 
+function assignTurnLength(time){
+ui_turnTime=time;}
 
 //This is called by ui_code for a chat message that I send
 function ui_outgoing_chat(msg){
