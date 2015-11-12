@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "dependencies": {
     "express": "^4.10.2",
-    "socket.io": "^1.3.7"
+    "socket.io": "^1.3.7",
+    "circular-list": ""
   },
   "devDependencies": {
     "chai": "^3.4.0",
