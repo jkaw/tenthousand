@@ -189,9 +189,21 @@ function game(gameID, gameCreator, listOfPlayers, turnLimit, startTime, whoseTur
 	//playerID of the player whose turn it is now
 	this.whoseTurn = whoseTurn;
 	this.currentTime = sysCurrentTime;
+	function get_player(playerID){
+		for(i = 0; i < listOfPlayers.size; i++){
+			if(listOfPlayers[i].id == playerID){
+				return listOfPlayers[i];
+			}
+		}
+		return null;
+	}
+	function get_current_player(){
+		return get_player(whoseTurn);
+	}
 	function advance_turn(){
 		//TODO: Find user_id of next player
 		//TODO: Set whoseTurn equal to the user_id
+		this.whoseTurn = listOfPlayers.indexOf(get_current_player()).next()
 	}
 }
 
