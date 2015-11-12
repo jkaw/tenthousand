@@ -135,15 +135,109 @@ validate_ID_help = function(id){
 		if (validGames[i].gameID == id) {
 			return true;
 		}
+<<<<<<< HEAD
 	}
 	return false;
 }
 
+=======
+	}
+	return false;
+}
+
+createfields = function(smallfieldnum, bigfieldnum) {
+	var resultfields = [];
+	
+	resultfields.push(field("big", "silo"));
+	resultfields.push(field("big", "building"));
+	for (i = 0; i < (bigfieldnum - 2); i++) {
+		resultfields.push(field("big", "irrigation"))
+	}
+	resultfields.push(field("small", "silo"));
+	resultfields.push(field("small", "building"));
+	for (i = 0; i < (smallfieldnum - 2); i++) {
+		resultfields.push(field ("small", "irrigation"))
+	}
+	return resultfields;
+
+
+	
+}
+
+distribute_fields = function(gameID){
+		//*
+		var tempgame = findgame(gameID, validGames);
+		var gamenum = findgamenum(gameID, validGames);
+
+		//need to create new method to retrive game object. 
+
+		if (findgame.listOfPlayers.size == 2) {
+			findgame.listOfPlayers[0] = (findgame.listOfPlayers[0].playernum, createfields(8,7));
+			findgame.listOfPlayers[1] = (findgame.listOfPlayers[1].playernum, createfields(8,7));
+			validGames[gamenum] = tempgame;
+		}
+		else if (findgame.listOfPlayers.size == 3) {
+			findgame.listOfPlayers[0] = (findgame.listOfPlayers[0].playernum, createfields(7,6).push(field("small", "irrigation")));
+			findgame.listOfPlayers[1] = (findgame.listOfPlayers[1].playernum, createfields(7,6).push(field("small", "irrigation")));
+			findgame.listOfPlayers[2] = (findgame.listOfPlayers[2].playernum, createfields(7,6));
+			validGames[gamenum] = tempgame;
+		}
+		else if (findgame.listOfPlayers.size == 4) {
+			findgame.listOfPlayers[0] = (findgame.listOfPlayers[0].playernum, createfields(6,5).push(field("small", "irrigation")));
+			findgame.listOfPlayers[1] = (findgame.listOfPlayers[1].playernum, createfields(6,5).push(field("small", "irrigation")));
+			findgame.listOfPlayers[2] = (findgame.listOfPlayers[2].playernum, createfields(6,5));
+			findgame.listOfPlayers[3] = (findgame.listOfPlayers[3].playernum, createfields(6,5));
+			validGames[gamenum] = tempgame;
+		}
+		else if (findgame.listOfPlayers.size == 5) {
+			findgame.listOfPlayers[0] = (findgame.listOfPlayers[0].playernum, createfields(5,4).push(field("small", "irrigation")));
+			findgame.listOfPlayers[1] = (findgame.listOfPlayers[1].playernum, createfields(5,4).push(field("small", "irrigation")));
+			findgame.listOfPlayers[2] = (findgame.listOfPlayers[2].playernum, createfields(5,4));
+			findgame.listOfPlayers[3] = (findgame.listOfPlayers[3].playernum, createfields(5,4));
+			findgame.listOfPlayers[4] = (findgame.listOfPlayers[4].playernum, createfields(5,4));
+			validGames[gamenum] = tempgame;
+		}
+
+
+
+
+
+		//*/
+	}
+
+findGame = function(gameID, GameArray) {
+	for (i = 0; i < GameArray.size; i ++) {
+		if (GameArray[i] == gameID) {
+			return GameArray[i];
+		}
+		else return null;
+	}
+
+}
+
+findGamenum = function(gameID, GameArray) {
+	for (i = 0; i < GameArray.size; i ++) {
+		if (GameArray[i] == gameID) {
+			return i;
+		}
+		else return null;
+	}
+
+}
+
+
+
+
+>>>>>>> 23b8e3cff6cff770fddc564d992cf7df2f07a436
 // stores all the valid games in a static array
 var validGames = [];
 
 // creates a new GUID and stores the new id in a static array
+<<<<<<< HEAD
 function call_create_ID() {
+=======
+function call_create_ID(){
+>>>>>>> 23b8e3cff6cff770fddc564d992cf7df2f07a436
 	var id = helper_create_ID() + helper_create_ID(true) + helper_create_ID(true) + helper_create_ID();
 	validGames.push(new game(id));
 	return id;
@@ -154,6 +248,8 @@ var helper_create_ID = function(s) {
 	var p = (Math.random().toString(16)+"000000000").substr(2,8);
 	return s ? "_" + p.substr(0,4) + "_" + p.substr(4,4) : p ;
 }
+<<<<<<< HEAD
+=======
 
 var call_get_time = function() {
 	var currentTime = new Date();
@@ -169,12 +265,35 @@ var sysCurrentTime = call_get_time();
 console.log(call_get_time());
 
 
+>>>>>>> 23b8e3cff6cff770fddc564d992cf7df2f07a436
 
+var call_get_time = function() {
+	var currentTime = new Date();
+	return currentTime.getHours().toString()
+		+ ":" + currentTime.getMinutes().toString()
+		+ ":" + currentTime.getSeconds().toString();
+};
+
+<<<<<<< HEAD
+
+
+var sysCurrentTime = call_get_time();
+
+console.log(call_get_time());
+
+
+
+=======
+>>>>>>> 23b8e3cff6cff770fddc564d992cf7df2f07a436
 //creates new game object
 function game(gameID, listOfPlayers, turnLimit, startTime, whoseTurn) {
 	//gameID randomly created when player creates new game, or specified when player joins game
 	this.gameID = gameID;
 	//array of all player objects within game - number of player objects created with specified gameID
+<<<<<<< HEAD
+=======
+	//should be in order of time joined and will determine turn sequence?
+>>>>>>> 23b8e3cff6cff770fddc564d992cf7df2f07a436
 	this.listOfPlayers = listOfPlayers;
 	//time limit specified by gameCreator for maximum turn length
 	this.turnLimit = turnLimit;
@@ -183,11 +302,16 @@ function game(gameID, listOfPlayers, turnLimit, startTime, whoseTurn) {
 	//playerID of the player whose turn it is now
 	this.whoseTurn = whoseTurn;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	this.currentTime = null;
+>>>>>>> 23b8e3cff6cff770fddc564d992cf7df2f07a436
 }
 
 //creates a new player object
 function player(playerNum, playerFields) {
 	//playerID specified when player creates new game or when player joins game
+<<<<<<< HEAD
 	this.playerNum = playerNum;
 	// an array of Field objects representing the fields owned by each player
 	this.playerFields = playerFields;
@@ -213,15 +337,30 @@ function player(playerNum, playerFields) {
 		this.whoseTurn = listOfPlayers.indexOf(get_current_player()).next()
 	}
 >>>>>>> 237020284d4ed78a28a8bbe5ea64f3c316be6ec8
+=======
+	//may need different player ID number separate from this one to allow players of same ID in different games
+	//possibly make var name concatenation of gameID and playerID
+	this.playerNum = playerNum;
+	// an array of Field objects representing the fields owned by each player
+	this.playerFields = playerFields;
+>>>>>>> 23b8e3cff6cff770fddc564d992cf7df2f07a436
 }
 
 //var name should be gameID with all dashes replaced with underscores
 var xxxxxxxx_xxxx_xxxx_xxxx_xxxxxxxxxxxx = new game("xxxxxxxx_xxxx_xxxx_xxxx_xxxxxxxxxxxx",
+<<<<<<< HEAD
 	"player1", ["player1", "player2", "player3", "player4", "player5"], 3.5, "NA", "player1");
 
 //var name should be gameID with all dashes replaced with underscores
 var yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy = new game("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy",
 	"player6", ["player6"], 5.0, "NA", "player6");
+=======
+	"player1", ["player1", "player2", "player3", "player4", "player5"], 3.5, "NA", "player1", sysCurrentTime);
+
+//var name should be gameID with all dashes replaced with underscores
+var yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy = new game("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy",
+	"player6", ["player6"], 5.0, "NA", "player6", sysCurrentTime);
+>>>>>>> 23b8e3cff6cff770fddc564d992cf7df2f07a436
 
 var createGame = function(playerID, turnLimit) {
 	//will initialize a game object and transition creator to "join game" lobby,
