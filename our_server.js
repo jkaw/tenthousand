@@ -119,7 +119,7 @@ app.get('/api/*',function(req,res){
 
 //Basic redirect for launching if anythin else is accessed
 app.get('/*',function(req,res){
-	res.redirect('/ui/index.html');
+	res.redirect('/ui/Home.html');
 });
 
 
