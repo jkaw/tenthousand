@@ -145,6 +145,8 @@ validate_ID_help = function(id){
 }
 
 createfields = function(smallfieldnum, bigfieldnum) {
+	//Creates an array of fields based on the starting number of fields.
+
 	var resultfields = [];
 
 	resultfields.push(field("big", "silo"));
@@ -168,32 +170,32 @@ distribute_fields = function(gameID){
 	var tempgame = findgame(gameID, validGames);
 	var gamenum = findgamenum(gameID, validGames);
 
-	//need to create new method to retrive game object.
+	//Creates a game object with each player having the starting amount of fields
 
 	if (findgame.listOfPlayers.size == 2) {
-		findgame.listOfPlayers[0] = (findgame.listOfPlayers[0].playernum, createfields(8,7));
-		findgame.listOfPlayers[1] = (findgame.listOfPlayers[1].playernum, createfields(8,7));
+		findgame.listOfPlayers[0] = new player(findgame.listOfPlayers[0].playernum, createfields(8,7));
+		findgame.listOfPlayers[1] = new player(findgame.listOfPlayers[1].playernum, createfields(8,7));
 		validGames[gamenum] = tempgame;
 	}
 	else if (findgame.listOfPlayers.size == 3) {
-		findgame.listOfPlayers[0] = (findgame.listOfPlayers[0].playernum, createfields(7,6).push(field("small", "irrigation")));
-		findgame.listOfPlayers[1] = (findgame.listOfPlayers[1].playernum, createfields(7,6).push(field("small", "irrigation")));
-		findgame.listOfPlayers[2] = (findgame.listOfPlayers[2].playernum, createfields(7,6));
+		findgame.listOfPlayers[0] = new player(findgame.listOfPlayers[0].playernum, createfields(7,6).push(new field("small", "irrigation")));
+		findgame.listOfPlayers[1] = new player(findgame.listOfPlayers[1].playernum, createfields(7,6).push(new field("small", "irrigation")));
+		findgame.listOfPlayers[2] = new player(findgame.listOfPlayers[2].playernum, createfields(7,6));
 		validGames[gamenum] = tempgame;
 	}
 	else if (findgame.listOfPlayers.size == 4) {
-		findgame.listOfPlayers[0] = (findgame.listOfPlayers[0].playernum, createfields(6,5).push(field("small", "irrigation")));
-		findgame.listOfPlayers[1] = (findgame.listOfPlayers[1].playernum, createfields(6,5).push(field("small", "irrigation")));
-		findgame.listOfPlayers[2] = (findgame.listOfPlayers[2].playernum, createfields(6,5));
-		findgame.listOfPlayers[3] = (findgame.listOfPlayers[3].playernum, createfields(6,5));
+		findgame.listOfPlayers[0] = new player(findgame.listOfPlayers[0].playernum, createfields(6,5).push(new field("small", "irrigation")));
+		findgame.listOfPlayers[1] = new player(findgame.listOfPlayers[1].playernum, createfields(6,5).push(new field("small", "irrigation")));
+		findgame.listOfPlayers[2] = new player(findgame.listOfPlayers[2].playernum, createfields(6,5));
+		findgame.listOfPlayers[3] = new player(findgame.listOfPlayers[3].playernum, createfields(6,5));
 		validGames[gamenum] = tempgame;
 	}
 	else if (findgame.listOfPlayers.size == 5) {
-		findgame.listOfPlayers[0] = (findgame.listOfPlayers[0].playernum, createfields(5,4).push(field("small", "irrigation")));
-		findgame.listOfPlayers[1] = (findgame.listOfPlayers[1].playernum, createfields(5,4).push(field("small", "irrigation")));
-		findgame.listOfPlayers[2] = (findgame.listOfPlayers[2].playernum, createfields(5,4));
-		findgame.listOfPlayers[3] = (findgame.listOfPlayers[3].playernum, createfields(5,4));
-		findgame.listOfPlayers[4] = (findgame.listOfPlayers[4].playernum, createfields(5,4));
+		findgame.listOfPlayers[0] = new player(findgame.listOfPlayers[0].playernum, createfields(5,4).push(new field("small", "irrigation")));
+		findgame.listOfPlayers[1] = new player(findgame.listOfPlayers[1].playernum, createfields(5,4).push(new field("small", "irrigation")));
+		findgame.listOfPlayers[2] = new player(findgame.listOfPlayers[2].playernum, createfields(5,4));
+		findgame.listOfPlayers[3] = new player(findgame.listOfPlayers[3].playernum, createfields(5,4));
+		findgame.listOfPlayers[4] = new player(findgame.listOfPlayers[4].playernum, createfields(5,4));
 		validGames[gamenum] = tempgame;
 	}
 
@@ -205,6 +207,8 @@ distribute_fields = function(gameID){
 }
 
 findGame = function(gameID, GameArray) {
+	//This will find the game object in the game array given the id.
+
 	for (i = 0; i < GameArray.size; i ++) {
 		if (GameArray[i] == gameID) {
 			return GameArray[i];
@@ -215,6 +219,7 @@ findGame = function(gameID, GameArray) {
 }
 
 findGamenum = function(gameID, GameArray) {
+	//this will find the position of the game object in a game array.
 	for (i = 0; i < GameArray.size; i ++) {
 		if (GameArray[i] == gameID) {
 			return i;
