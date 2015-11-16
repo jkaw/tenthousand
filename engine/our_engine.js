@@ -2,6 +2,10 @@
 
 CircularList = require('circular-list')
 
+//Load other engine files
+var engine_objects = require('./engine_objects');
+var engine_timing = require('./engine_timing');
+
 module.exports = {
 
 	/*****************************************
@@ -263,7 +267,7 @@ var sysCurrentTime = call_get_time();
 console.log(call_get_time());
 
 
-
+/*
 //creates new game object
 function game(gameID, listOfPlayers, turnLimit, startTime, whoseTurn) {
 	//gameID randomly created when player creates new game, or specified when player joins game
@@ -287,6 +291,7 @@ function player(playerNum, playerFields) {
 	this.playerFields = playerFields;
 	this.currentTime = sysCurrentTime;
 }
+*/
 
 function get_player(playerID){
 	for(i = 0; i < listOfPlayers.size; i++){
@@ -326,8 +331,10 @@ var createGame = function(playerID, turnLimit) {
 }
 
 var joinGame = function(userID, gameID) {
-	if (validate_ID_help(gameID) === true) { //call_create_ID.validGames.indexOf(gameID.toString()) > -1) {
-		gameID.listOfPlayers.push(userID);
+	var gameIDString = gameID.gameID;
+	console.log("TEST: " + gameIDString);
+	if (validate_ID_help(gameIDString)) { //call_create_ID.validGames.indexOf(gameID.toString()) > -1) {
+		gameID['listOfPlayers'].push(userID);
 		console.log("All players: " + gameID.listOfPlayers);
 	} else {
 		console.log("Error: Invalid game ID. Please try again.");
@@ -355,14 +362,13 @@ var advanceTurn = function(game) {
 }
 
 //startGame(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
-//fix valid id array so that id pushing does not occur only when random GUID is generated
 
-call_create_ID.validGames.push("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy", ["player6"], 5.0, "NA", "player6");
-call_create_ID.validGames.push("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy");
+validGames.push(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
 console.log("Should be true: " + validate_ID_help("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy"));
 //yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy.listOfPlayers.push("test player");
+joinGame("test player", yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
 console.log("Test players: " + yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy.listOfPlayers);
-joinGame("new player", yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy)
+//joinGame("new player", yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy)
 advanceTurn(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
 
 
