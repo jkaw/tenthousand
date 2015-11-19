@@ -110,6 +110,12 @@ app.get('/api/*',function(req,res){
 			}
 		}
 	}
+	else{
+		response = { 	error:true,
+						errors:['Unknown method call to our_server: '+method],
+						called_with:dictionary.query
+					};
+	}
 
 	//Generic response code
 	res.writeHead(200, {'Content-Type': 'text/plain'});
