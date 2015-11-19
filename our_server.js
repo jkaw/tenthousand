@@ -33,7 +33,7 @@ app.get('/api/*',function(req,res){
 	console.log("               data : "+JSON.stringify(dictionary.query));
 
 	var response;
-	if(method == "/api_create_game"){
+	if(method == "/api_ajax_create_game"){
 		if(dictionary.query.test == "true"){
 			response = { 	error:false,
 							errors:[],
@@ -42,7 +42,7 @@ app.get('/api/*',function(req,res){
 						};
 		}
 		else{
-			response = engine.from_api_create_game(dictionary.query);
+			response = engine.from_api_ajax_create_game(dictionary.query);
 			if(response === undefined){
 				response = {
 							error:true,

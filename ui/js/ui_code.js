@@ -32,7 +32,7 @@ var ui_main = function(){
 			
 		var callback_function = function(result){
 			if(result.error == false){
-            	$("div#create_game_box #user").html(result.game_id);
+            	$("div#ajax_create_game_box #user").html(result.game_id);
 				ui_game_id = result.game_id;
 				window.location = "page.html";
 			}
@@ -41,7 +41,7 @@ var ui_main = function(){
 			}
         };
 
-		api_create_game(user_id,ui_turnTime,callback_function);
+		api_ajax_create_game(user_id,ui_turnTime,callback_function);
 
 		return false; //Stop subsequent handling of this event
     });

@@ -36,12 +36,12 @@ function api_ajax_get_time(callback_function,test){
 			 	game_id: <game_id>
 			};
 */
-function api_create_game(user_id,turn_length,callback_function,test){
+function api_ajax_create_game(user_id,turn_length,callback_function,test){
 	var api_data = {user_id:user_id,
 					turn_length:turn_length,
 					test:test};
 
-	$.ajax({url: api_url_base+'api_create_game', dataType:"json",data:api_data,success: callback_function});
+	$.ajax({url: api_url_base+'api_ajax_create_game', dataType:"json",data:api_data,success: callback_function});
 }
 
 

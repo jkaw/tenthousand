@@ -42,7 +42,7 @@ module.exports = {
 		return list
 	},
 
-	from_api_create_game:function(user_id, turn_length) {
+	from_api_ajax_create_game:function(user_id, turn_length) {
 		var the_game_id = call_create_ID();
 		var new_game = new game(the_game_id, [user_id], turn_length, "NA", user_id);
 		console.log(the_game_id);
