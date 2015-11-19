@@ -72,7 +72,7 @@ function api_subscribe_to_chat(game_id,test){
 			 	players: [<player1_name>,<player2_name>,<player3_name>,<player4_name>]; //possibly null
 			};
 */
-function api_join_game(game_id,user_id,callback_function,test){
+function api_ajax_join_game(game_id,user_id,callback_function,test){
 	var api_data = {game_id:game_id,
 					user_id:user_id,
 					test:test};
@@ -82,7 +82,7 @@ function api_join_game(game_id,user_id,callback_function,test){
 				socket_subscribe(game_id);
 			}
 	}
-	$.ajax({url: api_url_base+'api_join_game', dataType:"json",data:api_data,success: wrapped_callback_function});
+	$.ajax({url: api_url_base+'api_ajax_join_game', dataType:"json",data:api_data,success: wrapped_callback_function});
 }
 
 

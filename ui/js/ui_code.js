@@ -62,7 +62,7 @@ var ui_main = function(){
 			}
         };
 
-		api_join_game(game_id,user_id,callback_function,false);
+		api_ajax_join_game(game_id,user_id,callback_function,false);
 
 		return false; //Stop subsequent handling of this event
     });

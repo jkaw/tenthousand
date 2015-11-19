@@ -64,13 +64,15 @@ module.exports = {
 			 	players: [<player1_name>,<player2_name>,<player3_name>,<player4_name>]; //possibly null
 			};
 	 */
-	from_api_join_game:function(user_id, game_id) {
+	from_api_ajax_join_game:function(user_id, game_id) {
+		console.log("not implemented");
+		return null;
+		/* Commented out by djp3 because validate_ID is undefined */
 		if (validate_ID === false) {
 			console.log("Error: Invalid game ID. Please try again.");
 		} else if (validate_ID) {
 // code to join game
 		}
-		console.log("not implemented");
 	},
 	/*****************************************/
 

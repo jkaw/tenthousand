@@ -43,7 +43,7 @@ app.get('/api/*',function(req,res){
 		}
 		else{
 			response = engine.from_api_ajax_create_game(dictionary.query);
-			if(response === undefined){
+			if((response === undefined) || (response == null)){
 				response = {
 							error:true,
 							errors:['Not implemented'],
@@ -52,7 +52,7 @@ app.get('/api/*',function(req,res){
 			}
 		}
 	}
-	else if(method === "/api_join_game"){
+	else if(method === "/api_ajax_join_game"){
 		if(dictionary.query.test == "true"){
 			response = { 	error:false,
 							errors:[],
@@ -61,8 +61,8 @@ app.get('/api/*',function(req,res){
 						};
 		}
 		else{
-			response = engine.from_api_join_game(dictionary.query);
-			if(response === undefined){
+			response = engine.from_api_ajax_join_game(dictionary.query);
+			if((response === undefined) || (response == null)){
 				response = {
 							error:true,
 							errors:['Not implemented'],

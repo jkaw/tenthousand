@@ -101,28 +101,28 @@
 			</div>
 
 			<div class="row myOutline">
-				<div id="api_join_game">
+				<div id="api_ajax_join_game_box">
 					<div class="col-sm-6 text-left">
 						<input id="game_id" autocomplete="off" placeholder="Game ID"></input>
 						<input id="user_id" autocomplete="off" placeholder="User ID"></input>
 					</div>
 					<div class="col-sm-2 text-left">
-						<button class="btn btn-default">api_join_game</button>
+						<button class="btn btn-default">api_ajax_join_game</button>
 					</div>
 					<div class="col-sm-4 text-left">
 						<div id="response"><pre></pre></div>
 					</div>
 
 					<script>
-					 	$("div#api_join_game button").click(function(){
-							var user_id = $("div#api_join_game #user_id").val();
-							var game_id = $("div#api_join_game #game_id").val();
+					 	$("div#api_ajax_join_game_box button").click(function(){
+							var user_id = $("div#api_ajax_join_game_box #user_id").val();
+							var game_id = $("div#api_ajax_join_game_box #game_id").val();
 							var callback_function = function(result){
-   				        		$("div#api_join_game div#response").html("<pre>"+JSON.stringify(result,null,2)+"</pre>");
+   				        		$("div#api_ajax_join_game_box div#response").html("<pre>"+JSON.stringify(result,null,2)+"</pre>");
         					};
 
 							var test=$("[name='test-switch']").is(":checked");
-							api_join_game(game_id,user_id,callback_function,test);
+							api_ajax_join_game(game_id,user_id,callback_function,test);
 
 							return false; //Stop subsequent handling of this event
 		   				 });
