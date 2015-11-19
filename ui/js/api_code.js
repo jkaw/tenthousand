@@ -136,6 +136,29 @@ function api_send_player_is_done(game_id,user_id,test){
 
 
 
+// This function is called by the ui when the player plays a field tile
+// 	game_id is a string that uniquely identifies the game
+// 	user_id is a string that uniquely identifies the user
+// 	field_tile is a tile object that looks like:
+//			{ 	size: "L" or "S",
+//				type: "S", "B", "J"
+//			}
+//	position is the location of the upper left corner of the tile:
+//			{	x: 0 - max_x,
+//				y: 0 - max_y
+//			}
+//  test: true or false if testing or not
+
+
+
+function api_socket_play_field(game_id,user_id,field_tile,position, test){
+	socket_play_field(game_id,user_id,field_tile,position, test);
+}
+
+
+
+
+
 
 // This function is called by the ui to cause a bunch of test messages to be
 // sent by the server 

@@ -108,14 +108,20 @@ module.exports = {
 			socket.on('player_is_done', function(data){
 				console.log('Socket:   Player is done: '+JSON.stringify(data));
 				if(data.test == true){
-					var outgoing = {message:{
-												note: "Your \"player is done\" message was received.  This is a response for when test is true.",
-												your_payload:data},
-									from: "test system"};
-					socket.emit('system_message',outgoing);
+					test_response(socket,'play_is_done',data);
 				}
+					
 			});
 
+
+
+			//Field Tile is played 
+			socket.on('play_field', function(data){
+				console.log('Socket:   Field played: '+JSON.stringify(data));
+				if(data.test == true){
+					test_response(socket,'play_field',data);
+				}
+			});
 
 
 			//test messages 
