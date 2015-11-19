@@ -8,11 +8,11 @@ var ui_main = function(){
 	//***************************
 
 	// Get_Time Button
-    $("div#get_time button").click(function(){
+    $("div#api_ajax_get_time_box button").click(function(){
 
 		var callback_function = function(result){
 			if(result.error == false){
-            	$("div#get_time #test").html(result.time);
+            	$("div#api_ajax_get_time_box #test").html(result.time);
 			}
 			else{
 				alert("We couldn't get time because:"+result.errors[0]);

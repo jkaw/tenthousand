@@ -1,6 +1,6 @@
 var should = require('chai').should(),
     scapegoat = require('../engine/our_engine'),
-    get_time = scapegoat.get_time;
+    get_time = scapegoat.api_ajax_get_time;
 
 describe('#get_time', function() {
   it('calculates the current time', function() {

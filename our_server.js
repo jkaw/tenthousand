@@ -100,7 +100,7 @@ app.get('/api/*',function(req,res){
 						};
 		}
 		else{
-			response = engine.from_api_get_time(dictionary.query);
+			response = engine.from_api_ajax_get_time(dictionary.query);
 			if(response === undefined){
 				response = {
 							error:true,

@@ -45,7 +45,7 @@
 				</div>
 			</div>
 			<div class="row myOutline">
-				<div id="api_ajax_get_time">
+				<div id="api_ajax_get_time_box">
 					<div class="col-sm-6 text-left">
 					</div>
 					<div class="col-sm-2 text-left">
@@ -56,9 +56,9 @@
 					</div>
 
 					<script>
-					 	$("div#api_ajax_get_time button").click(function(){
+					 	$("div#api_ajax_get_time_box button").click(function(){
 							var callback_function = function(result){
-   				        		$("div#api_ajax_get_time div#response").html("<pre>"+JSON.stringify(result,null,2)+"</pre>");
+   				        		$("div#api_ajax_get_time_box div#response").html("<pre>"+JSON.stringify(result,null,2)+"</pre>");
         					};
 
 							var test=$("[name='test-switch']").is(":checked");

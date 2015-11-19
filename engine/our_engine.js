@@ -9,7 +9,7 @@ module.exports = {
 				 	errors:['none'],
 					time:<time>};
 	 */
-	from_api_get_time: function() {
+	from_api_ajax_get_time: function() {
 		var result = { 	error:false,
 			errors:[],
 			time: call_get_time()
