@@ -20,7 +20,7 @@ var ui_main = function(){
 
         };
 
-		api_get_time(callback_function);
+		api_ajax_get_time(callback_function);
 
 		return false; //Stop subsequent handling of this event
     });

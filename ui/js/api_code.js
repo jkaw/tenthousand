@@ -16,9 +16,9 @@ var api_url_base = window.location.protocol + "//" + window.location.hostname + 
 			 	time: <time>
 			};
 */
-function api_get_time(callback_function,test){
+function api_ajax_get_time(callback_function,test){
 	var api_data = {test:test};
-	$.ajax({url: api_url_base+'api_get_time', dataType:"json",data:api_data,success: callback_function});
+	$.ajax({url: api_url_base+'api_ajax_get_time', dataType:"json",data:api_data,success: callback_function});
 }
 
 

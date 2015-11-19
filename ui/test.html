@@ -45,24 +45,24 @@
 				</div>
 			</div>
 			<div class="row myOutline">
-				<div id="api_get_time">
+				<div id="api_ajax_get_time">
 					<div class="col-sm-6 text-left">
 					</div>
 					<div class="col-sm-2 text-left">
-						<button class="btn btn-default">api_get_time</button>
+						<button class="btn btn-default">api_ajax_get_time</button>
 					</div>
 					<div class="col-sm-4 text-left">
 						<div id="response"></div>
 					</div>
 
 					<script>
-					 	$("div#api_get_time button").click(function(){
+					 	$("div#api_ajax_get_time button").click(function(){
 							var callback_function = function(result){
-   				        		$("div#api_get_time div#response").html("<pre>"+JSON.stringify(result,null,2)+"</pre>");
+   				        		$("div#api_ajax_get_time div#response").html("<pre>"+JSON.stringify(result,null,2)+"</pre>");
         					};
 
 							var test=$("[name='test-switch']").is(":checked");
-							api_get_time(callback_function,test);
+							api_ajax_get_time(callback_function,test);
 
 							return false; //Stop subsequent handling of this event
 		   				 });
@@ -239,6 +239,55 @@
 
 							var test=$("[name='test-switch']").is(":checked");
 							api_send_chat(game_id,user_id,the_message,test);
+
+							return false; //Stop subsequent handling of this event
+		   				 });
+					</script>
+				</div>
+			</div>
+
+
+
+
+
+
+			<div class="row myOutline">
+				<div id="api_play_field">
+					<div class="col-sm-6 text-left">
+						<input id="game_id" autocomplete="off" placeholder="Game ID"></input>
+						<input id="user_id" autocomplete="off" placeholder="User ID"></input>
+						<input id="field_size" autocomplete="off" placeholder="L or S"></input>
+						<input id="field_type" autocomplete="off" placeholder="S, B or J"></input>
+						<input id="x" autocomplete="off" placeholder="x coordinate"></input>
+						<input id="y" autocomplete="off" placeholder="y coordinate"></input>
+					</div>
+					<div class="col-sm-2 text-left">
+						<button class="btn btn-default">api_play_field</button>
+					</div>
+					<div class="col-sm-4 text-left">
+						<div id="response"></div>
+					</div>
+
+					<script>
+					 	$("div#api_play_field button").click(function(){
+							var game_id = $("div#api_play_field #game_id").val();
+							var user_id = $("div#api_play_field #user_id").val();
+							var field_size = $("div#api_play_field #field_size").val();
+							var field_type = $("div#api_play_field #field_type").val();
+							var x = $("div#api_play_field #x").val();
+							var y = $("div#api_play_field #y").val();
+
+							var test=$("[name='test-switch']").is(":checked");
+							var field_tile = {
+								size:field_size,
+								type:field_type
+							};
+							var position = {
+								x:x,
+								y:y
+							};
+
+							api_play_field(game_id,user_id,field_tile,position,test);
 
 							return false; //Stop subsequent handling of this event
 		   				 });

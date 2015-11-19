@@ -91,11 +91,11 @@ app.get('/api/*',function(req,res){
 			}
 		}
 	}
-	else{
+	else if(method === "/api_ajax_get_time"){
 		if(dictionary.query.test == "true"){
 			response = { 	error:false,
 							errors:[],
-							time: "42",
+							time: "10101010",
 							called_with:dictionary.query
 						};
 		}
