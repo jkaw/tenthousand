@@ -90,6 +90,24 @@ function socket_send_player_is_done(game_id,user_id,test){
 
 
 
+//Called by when a player plays a field tile 
+function socket_play_field(game_id,user_id,field_tile,position,test){
+	if(socket != null){
+		var data ={ socket_game_id:game_id,
+					user_id:user_id,
+					field_tile: field_tile,
+					position: position,
+					test:test};
+		socket.emit('play_field', data);
+	}
+	else{
+		alert('Not connected to game server, subscribe to chat first');
+	}
+
+}
+
+
+
 
 //Called to request test messages 
 function socket_send_test_messages(game_id,ui_from_api_incoming_chat,ui_from_api_player_joined_game,ui_from_api_time_start,ui_from_api_timer_expired,test){
