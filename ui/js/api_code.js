@@ -16,9 +16,9 @@ var api_url_base = window.location.protocol + "//" + window.location.hostname + 
 			 	time: <time>
 			};
 */
-function api_get_time(callback_function,test){
+function api_ajax_get_time(callback_function,test){
 	var api_data = {test:test};
-	$.ajax({url: api_url_base+'api_get_time', dataType:"json",data:api_data,success: callback_function});
+	$.ajax({url: api_url_base+'api_ajax_get_time', dataType:"json",data:api_data,success: callback_function});
 }
 
 
@@ -36,12 +36,12 @@ function api_get_time(callback_function,test){
 			 	game_id: <game_id>
 			};
 */
-function api_create_game(user_id,turn_length,callback_function,test){
+function api_ajax_create_game(user_id,turn_length,callback_function,test){
 	var api_data = {user_id:user_id,
 					turn_length:turn_length,
 					test:test};
 
-	$.ajax({url: api_url_base+'api_create_game', dataType:"json",data:api_data,success: callback_function});
+	$.ajax({url: api_url_base+'api_ajax_create_game', dataType:"json",data:api_data,success: callback_function});
 }
 
 
@@ -72,7 +72,7 @@ function api_subscribe_to_chat(game_id,test){
 			 	players: [<player1_name>,<player2_name>,<player3_name>,<player4_name>]; //possibly null
 			};
 */
-function api_join_game(game_id,user_id,callback_function,test){
+function api_ajax_join_game(game_id,user_id,callback_function,test){
 	var api_data = {game_id:game_id,
 					user_id:user_id,
 					test:test};
@@ -82,7 +82,7 @@ function api_join_game(game_id,user_id,callback_function,test){
 				socket_subscribe(game_id);
 			}
 	}
-	$.ajax({url: api_url_base+'api_join_game', dataType:"json",data:api_data,success: wrapped_callback_function});
+	$.ajax({url: api_url_base+'api_ajax_join_game', dataType:"json",data:api_data,success: wrapped_callback_function});
 }
 
 
@@ -130,6 +130,29 @@ function api_send_chat(game_id,from,the_message,test){
 // 	user_id is a string that uniquely identifies the user
 function api_send_player_is_done(game_id,user_id,test){
 	socket_send_player_is_done(game_id,user_id,test);
+}
+
+
+
+
+
+// This function is called by the ui when the player plays a field tile
+// 	game_id is a string that uniquely identifies the game
+// 	user_id is a string that uniquely identifies the user
+// 	field_tile is a tile object that looks like:
+//			{ 	size: "L" or "S",
+//				type: "S", "B", "J"
+//			}
+//	position is the location of the upper left corner of the tile:
+//			{	x: 0 - max_x,
+//				y: 0 - max_y
+//			}
+//  test: true or false if testing or not
+
+
+
+function api_socket_play_field(game_id,user_id,field_tile,position, test){
+	socket_play_field(game_id,user_id,field_tile,position, test);
 }
 
 

@@ -33,7 +33,7 @@ app.get('/api/*',function(req,res){
 	console.log("               data : "+JSON.stringify(dictionary.query));
 
 	var response;
-	if(method == "/api_create_game"){
+	if(method == "/api_ajax_create_game"){
 		if(dictionary.query.test == "true"){
 			response = { 	error:false,
 							errors:[],
@@ -42,8 +42,8 @@ app.get('/api/*',function(req,res){
 						};
 		}
 		else{
-			response = engine.from_api_create_game(dictionary.query);
-			if(response === undefined){
+			response = engine.from_api_ajax_create_game(dictionary.query);
+			if((response === undefined) || (response == null)){
 				response = {
 							error:true,
 							errors:['Not implemented'],
@@ -52,7 +52,7 @@ app.get('/api/*',function(req,res){
 			}
 		}
 	}
-	else if(method === "/api_join_game"){
+	else if(method === "/api_ajax_join_game"){
 		if(dictionary.query.test == "true"){
 			response = { 	error:false,
 							errors:[],
@@ -61,8 +61,8 @@ app.get('/api/*',function(req,res){
 						};
 		}
 		else{
-			response = engine.from_api_join_game(dictionary.query);
-			if(response === undefined){
+			response = engine.from_api_ajax_join_game(dictionary.query);
+			if((response === undefined) || (response == null)){
 				response = {
 							error:true,
 							errors:['Not implemented'],
@@ -91,16 +91,16 @@ app.get('/api/*',function(req,res){
 			}
 		}
 	}
-	else{
+	else if(method === "/api_ajax_get_time"){
 		if(dictionary.query.test == "true"){
 			response = { 	error:false,
 							errors:[],
-							time: "42",
+							time: "10101010",
 							called_with:dictionary.query
 						};
 		}
 		else{
-			response = engine.from_api_get_time(dictionary.query);
+			response = engine.from_api_ajax_get_time(dictionary.query);
 			if(response === undefined){
 				response = {
 							error:true,
@@ -109,6 +109,12 @@ app.get('/api/*',function(req,res){
 						};
 			}
 		}
+	}
+	else{
+		response = { 	error:true,
+						errors:['Unknown method call to our_server: '+method],
+						called_with:dictionary.query
+					};
 	}
 
 	//Generic response code

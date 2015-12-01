@@ -13,7 +13,7 @@ module.exports = {
 				 	errors:['none'],
 					time:<time>};
 	 */
-	from_api_get_time: function() {
+	from_api_ajax_get_time: function() {
 		var result = { 	error:false,
 			errors:[],
 			time: call_get_time()
@@ -46,7 +46,7 @@ module.exports = {
 		return list
 	},
 
-	from_api_create_game:function(user_id, turn_length) {
+	from_api_ajax_create_game:function(user_id, turn_length) {
 		var the_game_id = call_create_ID();
 		var new_game = new game(the_game_id, [user_id], turn_length, "NA", user_id);
 		console.log(the_game_id);
@@ -68,14 +68,16 @@ module.exports = {
 			 	players: [<player1_name>,<player2_name>,<player3_name>,<player4_name>]; //possibly null
 			};
 	 */
-	from_api_join_game:function(user_id, game_id) {
+	from_api_ajax_join_game:function(user_id, game_id) {
+		console.log("not implemented");
+		return null;
+		/* Commented out by djp3 because validate_ID is undefined */
 		if (validate_ID === false) {
 			console.log("Error: Invalid game ID. Please try again.");
 		} else if (validate_ID) {
 			joinGame(user_id, game_id);
 			return our_socket.socket_player_joined_game(game_id, user_id);
 		}
-		console.log("not implemented");
 	},
 	/*****************************************/
 
@@ -368,13 +370,21 @@ var advanceTurn = function(game) {
 
 //startGame(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
 
+<<<<<<< HEAD
 validGames.push(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
+=======
+/* Commenting out so we can compile -djp3
+
+call_create_ID.validGames.push("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy", ["player6"], 5.0, "NA", "player6");
+call_create_ID.validGames.push("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy");
+>>>>>>> f39b44b6c4419cae64cb49c8c85e2163860b220d
 console.log("Should be true: " + validate_ID_help("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy"));
 //yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy.listOfPlayers.push("test player");
 joinGame("test player", yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
 console.log("Test players: " + yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy.listOfPlayers);
 //joinGame("new player", yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy)
 advanceTurn(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
+*/
 
 
 
