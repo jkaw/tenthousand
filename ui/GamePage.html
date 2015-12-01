@@ -26,17 +26,17 @@ body {
  *  GAME
  *  Board size is calculated as follows:
  *
- *  .game = .area * 3
- *  459px = 153px * 3
+ *  .game = .area * 4
+ *  612px = 153px * 4
  *
- *  .area = padding-left + .tile * 3 + padding-right + border
- *  153px = 3px          + 48px  * 3 + 3px           + 3px
+ *  .area = padding-left + .tile * 4 + padding-right + border
+ *  153px = 3px          + 36px  * 4 + 3px           + 3px
  *
  *  .tile = padding-left + .width    + padding-right
- *   48px = 3px          + 42px      + 3px
+ *   36px = 3px          + 30px      + 3px
  */
 .game {
-    width: 459px;
+    width: 612px;
     margin-top: 50px;
     margin-right: auto;
     margin-left: auto;
@@ -66,19 +66,7 @@ body {
     padding: 3px;
 }
 
-.area:nth-child(3n-1),
-.area:nth-child(3n-0) {
-    border-left: 3px solid #444;
-}
 
-.area:nth-child(4),
-.area:nth-child(5),
-.area:nth-child(6),
-.area:nth-child(7),
-.area:nth-child(8),
-.area:nth-child(9) {
-    border-top: 3px solid #444;
-}
 
 /* Clearfixing .area */
 .area:after {
@@ -109,8 +97,8 @@ body {
  *  BUTTONS
  */
 .tile-button {
-    width: 42px;
-    height: 42px;
+    width: 30px;
+    height: 30px;
     padding: 0;
     cursor: pointer;
     vertical-align: middle;
@@ -239,6 +227,15 @@ Player 4 Assignments
         <div class="tile tile-2-0">
             <button type="button" class="tile-button"></button>
         </div>
+        <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
         <div class="tile tile-0-1">
             <button type="button" class="tile-button"></button>
         </div>
@@ -259,6 +256,15 @@ Player 4 Assignments
         </div>
     </div>
     <div class="area area-1-0">
+<div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div> 
         <div class="tile tile-0-0">
             <button type="button" class="tile-button"></button>
         </div>
@@ -288,6 +294,15 @@ Player 4 Assignments
         </div>
     </div>
     <div class="area area-2-0">
+    <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
              <div class="tile tile-0-0">
             <button type="button" class="tile-button"></button>
         </div>
@@ -326,6 +341,15 @@ Player 4 Assignments
         <div class="tile tile-2-0">
             <button type="button" class="tile-button"></button>
         </div>
+            <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
         <div class="tile tile-0-1">
             <button type="button" class="tile-button"></button>
         </div>
@@ -346,6 +370,15 @@ Player 4 Assignments
         </div>
     </div>
     <div class="area area-1-1">
+           <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
            <div class="tile tile-0-0">
             <button type="button" class="tile-button"></button>
         </div>
@@ -384,6 +417,15 @@ Player 4 Assignments
         <div class="tile tile-2-0">
             <button type="button" class="tile-button"></button>
         </div>
+             <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
         <div class="tile tile-0-1">
             <button type="button" class="tile-button"></button>
         </div>
@@ -404,6 +446,15 @@ Player 4 Assignments
         </div>
     </div>
     <div class="area area-0-2">
+              <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
               <div class="tile tile-0-0">
             <button type="button" class="tile-button"></button>
         </div>
@@ -442,6 +493,15 @@ Player 4 Assignments
         <div class="tile tile-2-0">
             <button type="button" class="tile-button"></button>
         </div>
+           <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
         <div class="tile tile-0-1">
             <button type="button" class="tile-button"></button>
         </div>
@@ -463,6 +523,129 @@ Player 4 Assignments
     </div>
     <div class="area area-2-2">
           <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+          <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-0-1">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-1">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-1">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-0-2">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-2">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-2">
+            <button type="button" class="tile-button"></button>
+        </div>
+    </div>
+    <div class="area area-1-1">
+           <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+           <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-0-1">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-1">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-1">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-0-2">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-2">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-2">
+            <button type="button" class="tile-button"></button>
+        </div>
+    </div>
+    <div class="area area-1-1">
+           <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+           <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-0-1">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-1">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-1">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-0-2">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-2">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-2">
+            <button type="button" class="tile-button"></button>
+        </div>
+    </div>
+    <div class="area area-1-1">
+           <div class="tile tile-0-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-1-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+        <div class="tile tile-2-0">
+            <button type="button" class="tile-button"></button>
+        </div>
+           <div class="tile tile-0-0">
             <button type="button" class="tile-button"></button>
         </div>
         <div class="tile tile-1-0">
