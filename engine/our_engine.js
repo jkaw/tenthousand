@@ -144,15 +144,15 @@ var createfields = function(smallfieldnum, bigfieldnum) {
 
 	var resultfields = [];
 
-	resultfields.push(field("big", "silo"));
-	resultfields.push(field("big", "building"));
+	resultfields.push(field("large", "silo"));
+	resultfields.push(field("large", "building"));
 	for (i = 0; i < (bigfieldnum - 2); i++) {
-		resultfields.push(field("big", "irrigation"))
+		resultfields.push(field("large", "irrigation"))
 	}
-	resultfields.push(field("small", "silo"));
-	resultfields.push(field("small", "building"));
+	resultfields.push(field("large", "silo"));
+	resultfields.push(field("large", "building"));
 	for (i = 0; i < (smallfieldnum - 2); i++) {
-		resultfields.push(field ("small", "irrigation"))
+		resultfields.push(field ("large", "irrigation"))
 	}
 	return resultfields;
 
@@ -204,7 +204,7 @@ var distribute_fields = function(gameID){
 var findGame = function(gameID, GameArray) {
 	//This will find the game object in the game array given the id.
 
-	for (i = 0; i < GameArray.size; i ++) {
+	for (i = 0; i < GameArray.size; i++) {
 		if (GameArray[i] == gameID) {
 			return GameArray[i];
 		}
@@ -265,6 +265,14 @@ var call_get_time = function() {
 var sysCurrentTime = call_get_time();
 
 console.log(call_get_time());
+
+//creates new field object
+function field(size, type){
+	this.size = size;
+	//need to specifiy size as either large or small
+	this.type = type;
+	//need to specify type as irrigation, silo, or building
+}
 
 
 
