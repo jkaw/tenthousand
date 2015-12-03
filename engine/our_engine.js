@@ -58,7 +58,11 @@ module.exports = {
 		console.log(the_game_id);
 		module.exports.validGames.push(new_game);
 		console.log(JSON.stringify(module.exports.validGames));
-		return the_game_id;
+		var ret = {};
+		ret.error = "false";
+		ret.errors = [];
+		ret.game_id = the_game_id;
+		return ret;
 	},
 	/*****************************************/
 
