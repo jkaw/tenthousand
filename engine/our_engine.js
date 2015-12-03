@@ -541,7 +541,7 @@ var valid_large_fields = function(gameID) {
 			for (j = 0; j < theGame.fieldsPlayed.length; j++) {
 				if (
 					(validMoves[i].x - 1) === theGame.fieldsPlayed[j].x
-					&& (validMoves[i].y -1) === theGame.fieldsPlayed[j].y
+					&& (validMoves[i].y - 1) === theGame.fieldsPlayed[j].y
 					&& theGame.fieldsPlayed[j].size === "large"
 				) {
 					validMoves.splice(i, 1);
@@ -556,7 +556,7 @@ var valid_large_fields = function(gameID) {
 
 
 	}
-
+	return validMoves;
 }
 
 
