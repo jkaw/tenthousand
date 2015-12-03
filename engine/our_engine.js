@@ -107,7 +107,8 @@ module.exports = {
 			 	time_started: <absolute time when game started>
 			};
 	 */
-	from_api_start_game:function(incoming){
+	from_api_start_game:function(game_id){
+		distribute_fields(game_id);
 		console.log("not implemented");
 	},
 	/*****************************************/
