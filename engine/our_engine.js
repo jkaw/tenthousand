@@ -59,7 +59,7 @@ module.exports = {
 		module.exports.validGames.push(new_game);
 		console.log(JSON.stringify(module.exports.validGames));
 		var ret = {};
-		ret.error = "false";
+		ret.error = false;
 		ret.errors = [];
 		ret.game_id = the_game_id;
 		return ret;
@@ -125,7 +125,7 @@ module.exports = {
 
 		var ret = {};
 
-		ret.error = "false";
+		ret.error = false;
 		ret.errors = [];
 
 
