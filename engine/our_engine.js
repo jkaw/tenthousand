@@ -55,9 +55,9 @@ module.exports = {
 		var listOfPlayers = [];
 		listOfPlayers.push(user_id);
 		var new_game = new game(the_game_id, listOfPlayers, turn_length, "NA", user_id);
-		console.log(the_game_id);
+		//console.log(the_game_id);
 		module.exports.validGames.push(new_game);
-		console.log(JSON.stringify(module.exports.validGames));
+		//console.log(JSON.stringify(module.exports.validGames));
 		var ret = {};
 		ret.error = false;
 		ret.errors = [];
@@ -128,14 +128,7 @@ module.exports = {
 		ret.error = false;
 		ret.errors = [];
 
-
-/*
-		ret.assignments = {stuff}
-		ret.otherstuff = {otherstuff}
-		ret.morestuff =[ more stuff];
-
-		add additional things that UI needs after start game to "ret"
-		*/
+		ret.players = findGame(game_id, validGames).listOfPlayers;
 
 
 		return ret;
@@ -200,14 +193,10 @@ var createfields = function(smallfieldnum, bigfieldnum) {
 
 var distribute_fields = function(gameID){
 	//*
-	console.log("at the start of distribute_fields: "+gameID);
-	console.log(JSON.stringify(module.exports.validGames));
 	var tempgame = findGame(gameID, module.exports.validGames);
 	var gamenum = findGamenum(gameID, module.exports.validGames);
 
 	//Creates a game object with each player having the starting amount of fields
-
-	console.log(JSON.stringify(tempgame));
 
 	if (tempgame.listOfPlayers.size == 2) {
 		tempgame.listOfPlayers[0] = new player(findGame(gameID, validGames).listOfPlayers[0].playernum, createfields(8,7));
@@ -247,7 +236,6 @@ var findGame = function(gameID, GameArray) {
 	//This will find the game object in the game array given the id.
 
 	for (i = 0; i < GameArray.length; i ++) {
-		console.log(JSON.stringify(GameArray[i]));
 		if (GameArray[i].gameID === gameID) {
 			return GameArray[i];
 		}
