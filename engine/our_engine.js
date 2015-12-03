@@ -129,11 +129,13 @@ module.exports = {
 		ret.errors = [];
 
 
+/*
 		ret.assignments = {stuff}
 		ret.otherstuff = {otherstuff}
 		ret.morestuff =[ more stuff];
 
 		add additional things that UI needs after start game to "ret"
+		*/
 
 
 		return ret;
