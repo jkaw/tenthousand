@@ -175,6 +175,8 @@ distribute_fields = function(gameID){
 
 	//Creates a game object with each player having the starting amount of fields
 
+//!!!!!!! Jared, should findgame here and following be tempgame instead?
+
 	if (findgame.listOfPlayers.size == 2) {
 		findgame.listOfPlayers[0] = new player(findgame.listOfPlayers[0].playernum, createfields(8,7));
 		findgame.listOfPlayers[1] = new player(findgame.listOfPlayers[1].playernum, createfields(8,7));
@@ -275,7 +277,7 @@ var sysCurrentTime = call_get_time();
 console.log(call_get_time());
 
 
-/*
+
 //creates new game object
 function game(gameID, listOfPlayers, turnLimit, startTime, whoseTurn) {
 	//gameID randomly created when player creates new game, or specified when player joins game
@@ -288,18 +290,21 @@ function game(gameID, listOfPlayers, turnLimit, startTime, whoseTurn) {
 	this.startTime = startTime;
 	//playerID of the player whose turn it is now
 	this.whoseTurn = whoseTurn;
-	this.currentTime = null;
+
+	//TODO: Jared, this is where field placement history should go
+	this.fieldsPlayed = [];
 }
 
 //creates a new player object
-function player(playerNum, playerFields) {
+function player(playerNum) {
 	//playerID specified when player creates new game or when player joins game
 	this.playerNum = playerNum;
-	// an array of Field objects representing the fields owned by each player
-	this.playerFields = playerFields;
-	this.currentTime = sysCurrentTime;
+
+	//TODO: Ensure playerFields and playerAssignments are populated on game start
+	this.playerFields = null;
+	this.playerAssignments = null;
 }
-*/
+
 
 function get_player(playerID){
 	for(i = 0; i < listOfPlayers.size; i++){
@@ -324,13 +329,6 @@ function advance_turn(){
 	this.whoseTurn = listOfPlayers.indexOf(get_current_player()).next()
 }
 
-//var name should be gameID with all dashes replaced with underscores
-var xxxxxxxx_xxxx_xxxx_xxxx_xxxxxxxxxxxx = new game("xxxxxxxx_xxxx_xxxx_xxxx_xxxxxxxxxxxx",
-	"player1", ["player1", "player2", "player3", "player4", "player5"], 3.5, "NA", "player1");
-
-//var name should be gameID with all dashes replaced with underscores
-var yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy = new game("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy",
-	"player6", ["player6"], 5.0, "NA", "player6");
 
 var createGame = function(playerID, turnLimit) {
 	//will initialize a game object and transition creator to "join game" lobby,
@@ -371,11 +369,6 @@ var advanceTurn = function(game) {
 
 //startGame(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-validGames.push(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
-=======
-=======
 var minor_assignments = [[{type:"small", x:0, y:0}, {type:"small", x:1, y:0}, {type:"small", x:2, y:0}],
 						 [{type:"large", x:0, y:0}, {type:"small", x:2, y:0}, {type:"small", x:2, y:1}],
 						 [{type:"small", x:0, y:1}, {type:"small", x:0, y:2}, {type:"large", x:1, y:0}],
@@ -488,8 +481,87 @@ var major_assignments = [[{type:"small", x:0, y:1}, {type:"small", x:1, y:0}, {t
 
 ];
 
->>>>>>> 39ddeacbee9dbde2b890a7009283b5d39f15dfec
+
+function coordinate(x, y) {
+	this.x = x;
+	this.y = y;
+}
+
+
+var allCoordinates = [];
+for (i = 50; i > -51; i--) {
+	for (j = 50; j > -51; j--) {
+		allCoordinates.push(coordinate(i,j));
+		//Below will print array of all existing coordinates in a 50x50 board
+		//console.log(i + ", " + j);
+	}
+};
+
+
+var valid_large_fields = function(gameID) {
+	var theGame = findGame(gameID, validGames);
+	//array validMoves stores coordinate objects
+	var validMoves = [];
+
+	if (theGame.fieldsPlayed.length < 1) {
+		validMoves.push(coordinate(0,0));
+	}
+	else {
+		validMoves = allCoordinates;
+		for (i = 0; i < allCoordinates; i++) {
+			if ( contains(theGame.fieldsPlayed, allCoordinates[i]) ) {
+				validMoves.splice(i, 1);
+			}
+			for (j = 0; j < theGame.fieldsPlayed.length; j++) {
+				if (
+					(validMoves[i].x - 1) === theGame.fieldsPlayed[j].x
+					&& (validMoves[i].y -1) === theGame.fieldsPlayed[j].y
+					&& theGame.fieldsPlayed[j].size === "large"
+				) {
+					validMoves.splice(i, 1);
+				}
+				//TODO: complete rest of conditionals, resuming with third item in ruleset -
+				// may need to create auxiliary function to return the upper and
+				// lower bounds of an entire fieldsPlayed history
+			}
+
+
+		}
+
+
+	}
+
+}
+
+
+
+var valid_small_fields = function(gameID) {
+
+}
+
+
+function contains(theArray, item) {
+	for (i = 0; i < theArray.length; i++) {
+		if (theArray[i] === item) {
+			return true;
+		}
+	}
+	return false;
+}
+
+
 /* Commenting out so we can compile -djp3
+
+
+ //var name should be gameID with all dashes replaced with underscores
+ var xxxxxxxx_xxxx_xxxx_xxxx_xxxxxxxxxxxx = new game("xxxxxxxx_xxxx_xxxx_xxxx_xxxxxxxxxxxx",
+ "player1", ["player1", "player2", "player3", "player4", "player5"], 3.5, "NA", "player1");
+
+ //var name should be gameID with all dashes replaced with underscores
+ var yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy = new game("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy",
+ "player6", ["player6"], 5.0, "NA", "player6");
+
+
 
 call_create_ID.validGames.push("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy", ["player6"], 5.0, "NA", "player6");
 call_create_ID.validGames.push("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy");
