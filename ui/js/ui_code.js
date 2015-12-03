@@ -34,7 +34,8 @@ var ui_main = function(){
 			if(result.error == false){
             	$("div#ajax_create_game_box #user").html(result.game_id);
 				ui_game_id = result.game_id;
-				window.location = "page.html";
+				console.log("hello world");
+				window.open("page.html","_self");
 			}
 			else{
 				alert("We couldn't register your game because:"+result.errors[0]);
