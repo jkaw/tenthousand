@@ -8,11 +8,11 @@ var ui_main = function(){
 	//***************************
 
 	// Get_Time Button
-    $("div#get_time button").click(function(){
+    $("div#api_ajax_get_time_box button").click(function(){
 
 		var callback_function = function(result){
 			if(result.error == false){
-            	$("div#get_time #test").html(result.time);
+            	$("div#api_ajax_get_time_box #test").html(result.time);
 			}
 			else{
 				alert("We couldn't get time because:"+result.errors[0]);
@@ -20,7 +20,7 @@ var ui_main = function(){
 
         };
 
-		api_get_time(callback_function);
+		api_ajax_get_time(callback_function);
 
 		return false; //Stop subsequent handling of this event
     });
@@ -32,7 +32,7 @@ var ui_main = function(){
 			
 		var callback_function = function(result){
 			if(result.error == false){
-            	$("div#create_game_box #user").html(result.game_id);
+            	$("div#ajax_create_game_box #user").html(result.game_id);
 				ui_game_id = result.game_id;
 				window.location = "page.html";
 			}
@@ -41,7 +41,7 @@ var ui_main = function(){
 			}
         };
 
-		api_create_game(user_id,ui_turnTime,callback_function);
+		api_ajax_create_game(user_id,ui_turnTime,callback_function);
 
 		return false; //Stop subsequent handling of this event
     });
@@ -62,7 +62,7 @@ var ui_main = function(){
 			}
         };
 
-		api_join_game(game_id,user_id,callback_function,false);
+		api_ajax_join_game(game_id,user_id,callback_function,false);
 
 		return false; //Stop subsequent handling of this event
     });

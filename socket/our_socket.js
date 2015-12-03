@@ -4,6 +4,26 @@
 
 
 var games = {};
+
+// This is a function that is used for providing feedback when a method is
+// called for testing purposes
+function test_response(socket,method,data){
+	if(socket != null){
+		var outgoing = {
+			message:{
+				note: "Your \""+method+"\" test message was received.  Test was true.",
+				your_payload:data
+			},
+			from: "our_socket server module"
+		};
+		socket.emit('system_message',outgoing);
+	}
+	else{
+		console.log("socket is null in test_response!");
+	};
+}
+
+
 module.exports = {
 	// socket variable
 	io: null,
@@ -49,6 +69,7 @@ module.exports = {
 	},
 
 
+
 	// This sets up the websocket connections
 	set_up_socket: function(server){
 		this.io = require('socket.io')(server);
@@ -77,14 +98,7 @@ module.exports = {
 				socket.broadcast.to(data.socket_game_id).emit('chat_message',outgoing);
 				console.log(JSON.stringify(data,null,2));
 				if(data.test == true){
-					var outgoing = {
-						message:{
-							note: "Your chat was sent out to everyone else.  This is a response for when test is true.",
-							your_payload:data
-						},
-						from: "test system"
-					};
-					socket.emit('system_message',outgoing);
+					test_response(socket,'chat_messasge',data);
 				}
 			});
 
@@ -94,14 +108,20 @@ module.exports = {
 			socket.on('player_is_done', function(data){
 				console.log('Socket:   Player is done: '+JSON.stringify(data));
 				if(data.test == true){
-					var outgoing = {message:{
-												note: "Your \"player is done\" message was received.  This is a response for when test is true.",
-												your_payload:data},
-									from: "test system"};
-					socket.emit('system_message',outgoing);
+					test_response(socket,'play_is_done',data);
 				}
+					
 			});
 
+
+
+			//Field Tile is played 
+			socket.on('play_field', function(data){
+				console.log('Socket:   Field played: '+JSON.stringify(data));
+				if(data.test == true){
+					test_response(socket,'play_field',data);
+				}
+			});
 
 
 			//test messages 
