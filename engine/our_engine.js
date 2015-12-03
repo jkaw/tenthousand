@@ -6,7 +6,11 @@ CircularList = require('circular-list')
 var engine_objects = require('./engine_objects');
 var engine_timing = require('./engine_timing');
 
+var validGames = [];
+
 module.exports = {
+
+	validGames: validGames,
 
 	/*****************************************
 	 result = { 	error:false,
@@ -48,8 +52,12 @@ module.exports = {
 
 	from_api_ajax_create_game:function(user_id, turn_length) {
 		var the_game_id = call_create_ID();
-		var new_game = new game(the_game_id, [user_id], turn_length, "NA", user_id);
+		var listOfPlayers = [];
+		listOfPlayers.push(user_id);
+		var new_game = new game(the_game_id, listOfPlayers, turn_length, "NA", user_id);
 		console.log(the_game_id);
+		module.exports.validGames.push(new_game);
+		console.log(JSON.stringify(validGames));
 		return the_game_id;
 	},
 	/*****************************************/
@@ -170,43 +178,36 @@ var createfields = function(smallfieldnum, bigfieldnum) {
 
 var distribute_fields = function(gameID){
 	//*
-	var tempgame = findgame(gameID, validGames);
-	var gamenum = findgamenum(gameID, validGames);
+	var tempgame = findGame(gameID, module.exports.validGames);
+	var gamenum = findGamenum(gameID, module.exports.validGames);
 
 	//Creates a game object with each player having the starting amount of fields
 
-<<<<<<< HEAD
-//!!!!!!! Jared, should findgame here and following be tempgame instead?
-
-	if (findgame.listOfPlayers.size == 2) {
-		findgame.listOfPlayers[0] = new player(findgame.listOfPlayers[0].playernum, createfields(8,7));
-		findgame.listOfPlayers[1] = new player(findgame.listOfPlayers[1].playernum, createfields(8,7));
-=======
+console.log(JSON.stringify(tempgame));
 	if (tempgame.listOfPlayers.size == 2) {
-		tempgame.listOfPlayers[0] = new player(findgame(gameID, validGames).listOfPlayers[0].playernum, createfields(8,7));
-		tempgame.listOfPlayers[1] = new player(findgame(gameID, validGames).listOfPlayers[1].playernum, createfields(8,7));
->>>>>>> e288508b61eac72f7ba86d4475b6bd889a1ff869
+		tempgame.listOfPlayers[0] = new player(findGame(gameID, validGames).listOfPlayers[0].playernum, createfields(8,7));
+		tempgame.listOfPlayers[1] = new player(findGame(gameID, validGames).listOfPlayers[1].playernum, createfields(8,7));
 		validGames[gamenum] = tempgame;
 	}
 	else if (tempgame.listOfPlayers.size == 3) {
-		tempgame.listOfPlayers[0] = new player(findgame(gameID, validGames).listOfPlayers[0].playernum, createfields(7,6).push(new field("small", "irrigation")));
-		tempgame.listOfPlayers[1] = new player(findgame(gameID, validGames).listOfPlayers[1].playernum, createfields(7,6).push(new field("small", "irrigation")));
-		tempgame.listOfPlayers[2] = new player(findgame(gameID, validGames).listOfPlayers[2].playernum, createfields(7,6));
+		tempgame.listOfPlayers[0] = new player(findGame(gameID, validGames).listOfPlayers[0].playernum, createfields(7,6).push(new field("small", "irrigation")));
+		tempgame.listOfPlayers[1] = new player(findGame(gameID, validGames).listOfPlayers[1].playernum, createfields(7,6).push(new field("small", "irrigation")));
+		tempgame.listOfPlayers[2] = new player(findGame(gameID, validGames).listOfPlayers[2].playernum, createfields(7,6));
 		validGames[gamenum] = tempgame;
 	}
 	else if (tempgame.listOfPlayers.size == 4) {
-		tempgame.listOfPlayers[0] = new player(findgame(gameID, validGames).listOfPlayers[0].playernum, createfields(6,5).push(new field("small", "irrigation")));
-		tempgame.listOfPlayers[1] = new player(findgame(gameID, validGames).listOfPlayers[1].playernum, createfields(6,5).push(new field("small", "irrigation")));
-		tempgame.listOfPlayers[2] = new player(findgame(gameID, validGames).listOfPlayers[2].playernum, createfields(6,5));
-		tempgame.listOfPlayers[3] = new player(findgame(gameID, validGames).listOfPlayers[3].playernum, createfields(6,5));
+		tempgame.listOfPlayers[0] = new player(findGame(gameID, validGames).listOfPlayers[0].playernum, createfields(6,5).push(new field("small", "irrigation")));
+		tempgame.listOfPlayers[1] = new player(findGame(gameID, validGames).listOfPlayers[1].playernum, createfields(6,5).push(new field("small", "irrigation")));
+		tempgame.listOfPlayers[2] = new player(findGame(gameID, validGames).listOfPlayers[2].playernum, createfields(6,5));
+		tempgame.listOfPlayers[3] = new player(findGame(gameID, validGames).listOfPlayers[3].playernum, createfields(6,5));
 		validGames[gamenum] = tempgame;
 	}
 	else if (tempgame.listOfPlayers.size == 5) {
-		tempgame.listOfPlayers[0] = new player(findgame(gameID, validGames).listOfPlayers[0].playernum, createfields(5,4).push(new field("small", "irrigation")));
-		tempgame.listOfPlayers[1] = new player(findgame(gameID, validGames).listOfPlayers[1].playernum, createfields(5,4).push(new field("small", "irrigation")));
-		tempgame.listOfPlayers[2] = new player(findgame(gameID, validGames).listOfPlayers[2].playernum, createfields(5,4));
-		tempgame.listOfPlayers[3] = new player(findgame(gameID, validGames).listOfPlayers[3].playernum, createfields(5,4));
-		tempgame.listOfPlayers[4] = new player(findgame(gameID, validGames).listOfPlayers[4].playernum, createfields(5,4));
+		tempgame.listOfPlayers[0] = new player(findGame(gameID, validGames).listOfPlayers[0].playernum, createfields(5,4).push(new field("small", "irrigation")));
+		tempgame.listOfPlayers[1] = new player(findGame(gameID, validGames).listOfPlayers[1].playernum, createfields(5,4).push(new field("small", "irrigation")));
+		tempgame.listOfPlayers[2] = new player(findGame(gameID, validGames).listOfPlayers[2].playernum, createfields(5,4));
+		tempgame.listOfPlayers[3] = new player(findGame(gameID, validGames).listOfPlayers[3].playernum, createfields(5,4));
+		tempgame.listOfPlayers[4] = new player(findGame(gameID, validGames).listOfPlayers[4].playernum, createfields(5,4));
 		validGames[gamenum] = tempgame;
 	}
 
@@ -221,7 +222,8 @@ var findGame = function(gameID, GameArray) {
 	//This will find the game object in the game array given the id.
 
 	for (i = 0; i < GameArray.size; i ++) {
-		if (GameArray[i] == gameID) {
+		console.log(JSON.stringify(GameArray[i]));
+		if (GameArray[i].gameID == gameID) {
 			return GameArray[i];
 		}
 		else return null;
@@ -242,7 +244,7 @@ var findGamenum = function(gameID, GameArray) {
 
 
 // stores all the valid games in a static array
-var validGames = [];
+//var validGames = [];
 
 // creates a new GUID and stores the new id in a static array
 function call_create_ID() {
