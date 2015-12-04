@@ -240,14 +240,11 @@ var distribute_fields = function(gameID){
 var findGame = function(gameID, GameArray) {
 	//This will find the game object in the game array given the id.
 
-<<<<<<< HEAD
-	for (i = 0; i < GameArray.size; i++) {
-		if (GameArray[i] == gameID) {
-=======
+
+
 	for (i = 0; i < GameArray.length; i ++) {
 		console.log(JSON.stringify(GameArray[i]));
 		if (GameArray[i].gameID === gameID) {
->>>>>>> 84fb23eceaa5c751cc289ff6e7fe5d9ee3b20d0f
 			return GameArray[i];
 		}
 		else return null;
@@ -313,6 +310,10 @@ function field(size, type){
 	//need to specifiy size as either large or small
 	this.type = type;
 	//need to specify type as irrigation, silo, or building
+	this.x = null;
+	//The x coordinate will be filled in once played
+	this.y = null;
+	//The y coordinate will be filled in once played
 }
 
 
