@@ -507,8 +507,8 @@ var valid_large_fields = function(gameID) {
 	}
 	else {
 		validMoves = allCoordinates;
-		for (i = 0; i < allCoordinates; i++) {
-			if ( contains(theGame.fieldsPlayed, allCoordinates[i]) ) {
+		for (i = 0; i < validMoves; i++) {
+			if ( contains(theGame.fieldsPlayed, validMoves[i]) ) {
 				validMoves.splice(i, 1);
 			}
 			for (j = 0; j < theGame.fieldsPlayed.length; j++) {
@@ -519,15 +519,12 @@ var valid_large_fields = function(gameID) {
 				) {
 					validMoves.splice(i, 1);
 				}
+
 				//TODO: complete rest of conditionals, resuming with third item in ruleset -
 				// may need to create auxiliary function to return the upper and
 				// lower bounds of an entire fieldsPlayed history
 			}
-
-
 		}
-
-
 	}
 	return validMoves;
 }
@@ -536,6 +533,38 @@ var valid_large_fields = function(gameID) {
 
 var valid_small_fields = function(gameID) {
 
+}
+
+
+var fieldHistoryCoordinates = function(gameID) {
+	var coordinatesArray = [];
+	var theGame = findGame(gameID, validGames);
+	for (i = 0; i < theGame.fieldsPlayed.length; i++) {
+		coordinatesArray.push(coordinates(theGame.fieldsPlayed[i].x, theGame.fieldsPlayed[i].y));
+	}
+	return coordinatesArray;
+}
+
+var greaterFieldBound = function(fieldArray) {
+	var theGreaterBound = coordinates(0, 0);
+	for (i = 0; i < fieldArray.length; i++) {
+		if (fieldArray[i].size === "small") {
+			theGreaterBound.x = Math.max(theGreaterBound.x, (fieldArray[i].x + 1));
+			theGreaterBound.y = Math.max(theGreaterBound.y, (fieldArray[i].y + 1));
+		}
+		else if (fieldArray[i].size === "large") {
+			theGreaterBound.x = Math.max(theGreaterBound.x, (fieldArray[i].x + 2));
+			theGreaterBound.y = Math.max(theGreaterBound.y, (fieldArray[i].y + 2));
+		}
+	}
+	return theGreaterBound;
+}
+
+var lesserFieldBound = function(coordinatesArray) {
+	var theLesserBound = coordinates.length(0, 0);
+	for (i = 0; i < coordinatesArray.length; i++) {
+
+	}
 }
 
 
