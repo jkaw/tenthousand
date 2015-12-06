@@ -167,15 +167,15 @@ var createfields = function(smallfieldnum, bigfieldnum) {
 
 	var resultfields = [];
 
-	resultfields.push(field("big", "silo"));
-	resultfields.push(field("big", "building"));
+	resultfields.push(field("large", "silo"));
+	resultfields.push(field("large", "building"));
 	for (i = 0; i < (bigfieldnum - 2); i++) {
-		resultfields.push(field("big", "irrigation"))
+		resultfields.push(field("large", "irrigation"))
 	}
-	resultfields.push(field("small", "silo"));
-	resultfields.push(field("small", "building"));
+	resultfields.push(field("large", "silo"));
+	resultfields.push(field("large", "building"));
 	for (i = 0; i < (smallfieldnum - 2); i++) {
-		resultfields.push(field ("small", "irrigation"))
+		resultfields.push(field ("large", "irrigation"))
 	}
 	return resultfields;
 
@@ -187,50 +187,44 @@ var distribute_fields = function(gameID){
 	//*
 	console.log("at the start of distribute_fields: "+gameID);
 	console.log(JSON.stringify(module.exports.validGames));
-	var tempgame = findGame(gameID, module.exports.validGames);
+	var tempGame = findGame(gameID, module.exports.validGames);
 	var gamenum = findGamenum(gameID, module.exports.validGames);
 
 	//Creates a game object with each player having the starting amount of fields
 
-	console.log(JSON.stringify(tempgame));
+	console.log(JSON.stringify(tempGame));
 
-	if (tempgame.listOfPlayers.size == 2) {
-		tempgame.listOfPlayers[0] = new player(findGame(gameID, validGames).listOfPlayers[0].playernum, createfields(8,7));
-		tempgame.listOfPlayers[1] = new player(findGame(gameID, validGames).listOfPlayers[1].playernum, createfields(8,7));
-		validGames[gamenum] = tempgame;
+	if (tempGame.listOfPlayers.size == 2) {
+		tempGame.listOfPlayers[0] = new player(findGame(gameID, validGames).listOfPlayers[0].playerID, createfields(8,7));
+		tempGame.listOfPlayers[1] = new player(findGame(gameID, validGames).listOfPlayers[1].playerID, createfields(8,7));
+		validGames[gamenum] = tempGame;
 	}
-	else if (tempgame.listOfPlayers.size == 3) {
-		tempgame.listOfPlayers[0] = new player(findGame(gameID, validGames).listOfPlayers[0].playernum, createfields(7,6).push(new field("small", "irrigation")));
-		tempgame.listOfPlayers[1] = new player(findGame(gameID, validGames).listOfPlayers[1].playernum, createfields(7,6).push(new field("small", "irrigation")));
-		tempgame.listOfPlayers[2] = new player(findGame(gameID, validGames).listOfPlayers[2].playernum, createfields(7,6));
-		validGames[gamenum] = tempgame;
+	else if (tempGame.listOfPlayers.size == 3) {
+		tempGame.listOfPlayers[0] = new player(findGame(gameID, validGames).listOfPlayers[0].playerID, createfields(7,6).push(new field("small", "irrigation")));
+		tempGame.listOfPlayers[1] = new player(findGame(gameID, validGames).listOfPlayers[1].playerID, createfields(7,6).push(new field("small", "irrigation")));
+		tempGame.listOfPlayers[2] = new player(findGame(gameID, validGames).listOfPlayers[2].playerID, createfields(7,6));
+		validGames[gamenum] = tempGame;
 	}
-	else if (tempgame.listOfPlayers.size == 4) {
-		tempgame.listOfPlayers[0] = new player(findGame(gameID, validGames).listOfPlayers[0].playernum, createfields(6,5).push(new field("small", "irrigation")));
-		tempgame.listOfPlayers[1] = new player(findGame(gameID, validGames).listOfPlayers[1].playernum, createfields(6,5).push(new field("small", "irrigation")));
-		tempgame.listOfPlayers[2] = new player(findGame(gameID, validGames).listOfPlayers[2].playernum, createfields(6,5));
-		tempgame.listOfPlayers[3] = new player(findGame(gameID, validGames).listOfPlayers[3].playernum, createfields(6,5));
-		validGames[gamenum] = tempgame;
+	else if (tempGame.listOfPlayers.size == 4) {
+		tempGame.listOfPlayers[0] = new player(findGame(gameID, validGames).listOfPlayers[0].playerID, createfields(6,5).push(new field("small", "irrigation")));
+		tempGame.listOfPlayers[1] = new player(findGame(gameID, validGames).listOfPlayers[1].playerID, createfields(6,5).push(new field("small", "irrigation")));
+		tempGame.listOfPlayers[2] = new player(findGame(gameID, validGames).listOfPlayers[2].playerID, createfields(6,5));
+		tempGame.listOfPlayers[3] = new player(findGame(gameID, validGames).listOfPlayers[3].playerID, createfields(6,5));
+		validGames[gamenum] = tempGame;
 	}
-	else if (tempgame.listOfPlayers.size == 5) {
-		tempgame.listOfPlayers[0] = new player(findGame(gameID, validGames).listOfPlayers[0].playernum, createfields(5,4).push(new field("small", "irrigation")));
-		tempgame.listOfPlayers[1] = new player(findGame(gameID, validGames).listOfPlayers[1].playernum, createfields(5,4).push(new field("small", "irrigation")));
-		tempgame.listOfPlayers[2] = new player(findGame(gameID, validGames).listOfPlayers[2].playernum, createfields(5,4));
-		tempgame.listOfPlayers[3] = new player(findGame(gameID, validGames).listOfPlayers[3].playernum, createfields(5,4));
-		tempgame.listOfPlayers[4] = new player(findGame(gameID, validGames).listOfPlayers[4].playernum, createfields(5,4));
-		validGames[gamenum] = tempgame;
+	else if (tempGame.listOfPlayers.size == 5) {
+		tempGame.listOfPlayers[0] = new player(findGame(gameID, validGames).listOfPlayers[0].playerID, createfields(5,4).push(new field("small", "irrigation")));
+		tempGame.listOfPlayers[1] = new player(findGame(gameID, validGames).listOfPlayers[1].playerID, createfields(5,4).push(new field("small", "irrigation")));
+		tempGame.listOfPlayers[2] = new player(findGame(gameID, validGames).listOfPlayers[2].playerID, createfields(5,4));
+		tempGame.listOfPlayers[3] = new player(findGame(gameID, validGames).listOfPlayers[3].playerID, createfields(5,4));
+		tempGame.listOfPlayers[4] = new player(findGame(gameID, validGames).listOfPlayers[4].playerID, createfields(5,4));
+		validGames[gamenum] = tempGame;
 	}
-
-
-
-
-
 	//*/
-}
+};
 
 var findGame = function(gameID, GameArray) {
 	//This will find the game object in the game array given the id.
-
 	for (i = 0; i < GameArray.length; i ++) {
 		console.log(JSON.stringify(GameArray[i]));
 		if (GameArray[i].gameID === gameID) {
@@ -238,7 +232,7 @@ var findGame = function(gameID, GameArray) {
 		}
 		else return null;
 	}
-}
+};
 
 var findGamenum = function(gameID, GameArray) {
 	//this will find the position of the game object in a game array.
@@ -248,7 +242,7 @@ var findGamenum = function(gameID, GameArray) {
 		}
 		else return null;
 	}
-}
+};
 
 get_valid_assignments = function(game_id){
 	currentGame = findGame(game_id);
@@ -271,7 +265,7 @@ function call_create_ID() {
 var helper_create_ID = function(s) {
 	var p = (Math.random().toString(16)+"000000000").substr(2,8);
 	return s ? "_" + p.substr(0,4) + "_" + p.substr(4,4) : p ;
-}
+};
 
 var call_get_time = function() {
 	var currentTime = new Date();
@@ -282,7 +276,17 @@ var call_get_time = function() {
 
 var sysCurrentTime = call_get_time();
 
-
+//creates new field object
+function field(size, type){
+	this.size = size;
+	//need to specifiy size as either large or small
+	this.type = type;
+	//need to specify type as irrigation, silo, or building
+	this.x = null;
+	//The x coordinate will be filled in once played
+	this.y = null;
+	//The y coordinate will be filled in once played
+}
 
 //creates new game object
 function game(gameID, listOfPlayers, turnLimit, startTime, whoseTurn) {
@@ -396,7 +400,7 @@ var minor_assignments = [[{type:"small", x:0, y:0}, {type:"small", x:1, y:0}, {t
 	[{type:"small", x:0, y:0}, {type:"large", x:0, y:1}, {type:"large", x:2, y:2}],
 	[{type:"large", x:0, y:2}, {type:"large", x:2, y:1}, {type:"small", x:3, y:0}],
 	[{type:"large", x:0, y:0}, {type:"large", x:2, y:0}, {type:"large", x:2, y:2}],
-	[{type:"large", x:0, y:0}, {type:"large", x:2, y:0}, {type:"large", x:1, y:2}],
+	[{type:"large", x:0, y:0}, {type:"large", x:2, y:0}, {type:"large", x:1, y:2}]
 ];
 
 
@@ -477,7 +481,6 @@ var major_assignments = [[{type:"small", x:0, y:1}, {type:"small", x:1, y:0}, {t
 	[{type:"large", x:0, y:5}, {type:"large", x:2, y:2}, {type:"large", x:2, y:4}, {type:"large", x:3, y:0}],
 	[{type:"large", x:0, y:0}, {type:"large", x:0, y:2}, {type:"large", x:2, y:3}, {type:"large", x:2, y:5}],
 	[{type:"large", x:0, y:5}, {type:"large", x:1, y:3}, {type:"large", x:3, y:0}, {type:"large", x:3, y:2}]
-
 ];
 
 
@@ -494,55 +497,6 @@ for (i = 50; i > -51; i--) {
 		//Below will print array of all existing coordinates in a 50x50 board
 		//console.log(i + ", " + j);
 	}
-};
-
-
-var valid_large_fields = function(gameID) {
-	var theGame = findGame(gameID, validGames);
-	//array validMoves stores coordinates objects
-	var validMoves = [];
-
-	if (theGame.fieldsPlayed.length < 1) {
-		validMoves.push(coordinates(0,0));
-	}
-	else {
-		validMoves = allCoordinates;
-		for (i = 0; i < validMoves; i++) {
-			if ( contains(theGame.fieldsPlayed, validMoves[i]) ) {
-				validMoves.splice(i, 1);
-			}
-			for (j = 0; j < theGame.fieldsPlayed.length; j++) {
-				if (
-					(validMoves[i].x - 1) === theGame.fieldsPlayed[j].x
-					&& (validMoves[i].y - 1) === theGame.fieldsPlayed[j].y
-					&& theGame.fieldsPlayed[j].size === "large"
-				) {
-					validMoves.splice(i, 1);
-				}
-
-				//TODO: complete rest of conditionals, resuming with third item in ruleset -
-				// may need to create auxiliary function to return the upper and
-				// lower bounds of an entire fieldsPlayed history
-			}
-		}
-	}
-	return validMoves;
-}
-
-
-
-var valid_small_fields = function(gameID) {
-
-}
-
-
-var fieldHistoryCoordinates = function(gameID) {
-	var coordinatesArray = [];
-	var theGame = findGame(gameID, validGames);
-	for (i = 0; i < theGame.fieldsPlayed.length; i++) {
-		coordinatesArray.push(coordinates(theGame.fieldsPlayed[i].x, theGame.fieldsPlayed[i].y));
-	}
-	return coordinatesArray;
 }
 
 var greaterFieldBound = function(fieldArray) {
@@ -558,24 +512,224 @@ var greaterFieldBound = function(fieldArray) {
 		}
 	}
 	return theGreaterBound;
-}
+};
 
-var lesserFieldBound = function(coordinatesArray) {
+var lesserFieldBound = function(fieldArray) {
 	var theLesserBound = coordinates.length(0, 0);
-	for (i = 0; i < coordinatesArray.length; i++) {
-
-	}
-}
-
-
-function contains(theArray, item) {
-	for (i = 0; i < theArray.length; i++) {
-		if (theArray[i] === item) {
-			return true;
+	for (i = 0; i < fieldArray.length; i++) {
+		if (fieldArray[i].size === "small") {
+			theLesserBound.x = Math.min(theLesserBound.x, (fieldArray[i].x - 1));
+			theLesserBound.y = Math.min(theLesserBound.y, (fieldArray[i].y - 1));
+		}
+		else if (fieldArray[i].size === "large") {
+			theLesserBound.x = Math.min(theLesserBound.x, (fieldArray[i].x - 2));
+			theLesserBound.y = Math.min(theLesserBound.y, (fieldArray[i].y - 2));
 		}
 	}
-	return false;
-}
+	return theLesserBound;
+};
+
+var valid_large_fields = function(gameID) {
+	var theGame = findGame(gameID, validGames);
+	//array validMoves stores coordinates objects
+	var validMoves = [];
+	//calculates theGreaterBound of a current game board
+	var theGreaterBound = greaterFieldBound(theGame.fieldsPlayed);
+	//calculates theLesserBound of a current game board
+	var theLesserBound = lesserFieldBound(theGame.fieldsPlayed);
+
+	//this if returns (0, 0) if no fields have yet been played
+	if (theGame.fieldsPlayed.length < 1) {
+		validMoves.push(coordinates(0,0));
+	}
+	//else checks for every instance other than above base case
+	else {
+		validMoves = allCoordinates;
+		//this for loop moves through all coordinates on board
+		for (i = 0; i < validMoves; i++) {
+			//this if checks to remove all coordinates that contain an x or y > 48
+			if (validMoves[i].x > 48
+				|| validMoves[i].y > 48) {
+				validMoves.splice(i, 1);
+			}
+			//this if checks to remove all coordinates greater than the current greaterFieldBound
+			if (validMoves[i].x > theGreaterBound.x
+				|| validMoves[i].y > theGreaterBound.y) {
+				validMoves.splice(i, 1);
+			}
+			//this if checks to remove all coordinates lower than the current lesserFieldBound
+			if (validMoves[i].x < theLesserBound.x
+				|| validMoves[i].y < theLesserBound.y) {
+				validMoves.splice(i, 1);
+			}
+			//this for loop moves through the array of all fields that have already been placed
+			for (j = 0; j < theGame.fieldsPlayed.length; j++) {
+				//this if checks to remove all coordinates that have already been played
+				if (
+					validMoves[i].x === theGame.fieldsPlayed[j].x
+					&& validMoves[i].y === theGame.fieldsPlayed[j].y
+				) {
+					validMoves.splice(i, 1);
+				}
+				//this if checks to remove all coordinates that would be inside an already placed large field
+				if (
+					(
+						theGame.fieldsPlayed[j].size === "large"
+						&& validMoves[i].x === (theGame.fieldsPlayed[j].x + 1)
+						&& validMoves[i].y === (theGame.fieldsPlayed[j].y + 1)
+					)
+					|| (theGame.fieldsPlayed[j].size === "large"
+						&& validMoves[i].x === theGame.fieldsPlayed[j].x
+						&& validMoves[i].y === (theGame.fieldsPlayed[j].y + 1)
+					)
+					|| (theGame.fieldsPlayed[j].size === "large"
+						&& validMoves[i].x === (theGame.fieldsPlayed[j].x + 1)
+						&& validMoves[i].y === theGame.fieldsPlayed[j].y
+					)
+				) {
+					validMoves.splice(i, 1);
+				}
+				//this if checks to remove all coordinates that would allow a placed large field to overlap an existing
+				//large field's upper right or lower left corner (i.e. non-coordinate or non-boundary corners)
+				if (
+					(
+						theGame.fieldsPlayed[j].size === "large"
+						&& validMoves[i].x === (theGame.fieldsPlayed[j].x + 1)
+						&& validMoves[i].y === (theGame.fieldsPlayed[j].y - 1)
+					)
+					|| (theGame.fieldsPlayed[j].size === "large"
+						&& validMoves[i].x === (theGame.fieldsPlayed[j].x - 1)
+						&& validMoves[i].y === (theGame.fieldsPlayed[j].y + 1)
+					)
+					|| (theGame.fieldsPlayed[j].size === "large"
+						&& validMoves[i].x === (theGame.fieldsPlayed[j].x - 1)
+						&& validMoves[i].y === (theGame.fieldsPlayed[j].y - 1)
+					)
+				) {
+					validMoves.splice(i, 1);
+				}
+			}
+		}
+	}
+	return validMoves;
+};
+
+
+
+var valid_small_fields = function(gameID) {
+	var theGame = findGame(gameID, validGames);
+	//array validMoves stores coordinates objects
+	var validMoves = [];
+	//calculates theGreaterBound of a current game board
+	var theGreaterBound = greaterFieldBound(theGame.fieldsPlayed);
+	//calculates theLesserBound of a current game board
+	var theLesserBound = lesserFieldBound(theGame.fieldsPlayed);
+
+	//this if returns (0, 0) if no fields have yet been played
+	if (theGame.fieldsPlayed.length < 1) {
+		validMoves.push(coordinates(0,0));
+	}
+	//else checks for every instance other than above base case
+	else {
+		validMoves = allCoordinates;
+		//this for loop moves through all coordinates on board
+		for (i = 0; i < validMoves; i++) {
+			//this if checks to remove all coordinates that contain an x or y > 48
+			if (validMoves[i].x > 49
+				|| validMoves[i].y > 49) {
+				validMoves.splice(i, 1);
+			}
+			//this if checks to remove all coordinates greater than the current greaterFieldBound
+			if (validMoves[i].x > theGreaterBound.x
+				|| validMoves[i].y > theGreaterBound.y) {
+				validMoves.splice(i, 1);
+			}
+			//this if checks to remove all coordinates lower than the current lesserFieldBound
+			if (validMoves[i].x < theLesserBound.x
+				|| validMoves[i].y < theLesserBound.y) {
+				validMoves.splice(i, 1);
+			}
+			//this for loop moves through the array of all fields that have already been placed
+			for (j = 0; j < theGame.fieldsPlayed.length; j++) {
+				//this if checks to remove all coordinates that have already been played
+				if (
+					validMoves[i].x === theGame.fieldsPlayed[j].x
+					&& validMoves[i].y === theGame.fieldsPlayed[j].y
+				) {
+					validMoves.splice(i, 1);
+				}
+				//this if checks to remove all coordinates that would be inside an already placed large field
+				if (
+					(
+						theGame.fieldsPlayed[j].size === "large"
+						&& validMoves[i].x === (theGame.fieldsPlayed[j].x + 1)
+						&& validMoves[i].y === (theGame.fieldsPlayed[j].y + 1)
+					)
+					|| (theGame.fieldsPlayed[j].size === "large"
+						&& validMoves[i].x === theGame.fieldsPlayed[j].x
+						&& validMoves[i].y === (theGame.fieldsPlayed[j].y + 1)
+					)
+					|| (theGame.fieldsPlayed[j].size === "large"
+						&& validMoves[i].x === (theGame.fieldsPlayed[j].x + 1)
+						&& validMoves[i].y === theGame.fieldsPlayed[j].y
+					)
+				) {
+					validMoves.splice(i, 1);
+				}
+				//this if checks to remove all coordinates that would allow a placed large field to overlap an existing
+				//large field's upper right or lower left corner (i.e. non-coordinate or non-boundary corners)
+				/* This section not necessary for checking valid placement of small fields
+				 if (
+				 (
+				 theGame.fieldsPlayed[j].size === "large"
+				 && validMoves[i].x === (theGame.fieldsPlayed[j].x + 1)
+				 && validMoves[i].y === (theGame.fieldsPlayed[j].y - 1)
+				 )
+				 || (theGame.fieldsPlayed[j].size === "large"
+				 && validMoves[i].x === (theGame.fieldsPlayed[j].x - 1)
+				 && validMoves[i].y === (theGame.fieldsPlayed[j].y + 1)
+				 )
+				 || (theGame.fieldsPlayed[j].size === "large"
+				 && validMoves[i].x === (theGame.fieldsPlayed[j].x - 1)
+				 && validMoves[i].y === (theGame.fieldsPlayed[j].y - 1)
+				 )
+				 ) {
+				 validMoves.splice(i, 1);
+				 }
+				 */
+			}
+		}
+	}
+	return validMoves;
+};
+
+
+
+
+
+/* Likely not necessary
+
+ function contains(theArray, item) {
+ for (i = 0; i < theArray.length; i++) {
+ if (theArray[i] === item) {
+ return true;
+ }
+ }
+ return false;
+ }
+
+ var fieldHistoryCoordinates = function(gameID) {
+ var coordinatesArray = [];
+ var theGame = findGame(gameID, validGames);
+ for (i = 0; i < theGame.fieldsPlayed.length; i++) {
+ coordinatesArray.push(coordinates(theGame.fieldsPlayed[i].x, theGame.fieldsPlayed[i].y));
+ }
+ return coordinatesArray;
+ };
+
+ */
+
+
 
 
 /* Commenting out so we can compile -djp3
