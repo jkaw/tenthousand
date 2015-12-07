@@ -184,15 +184,15 @@ var createfields = function(smallfieldnum, bigfieldnum) {
 
 	var resultfields = [];
 
-	resultfields.push(field("large", "silo"));
-	resultfields.push(field("large", "building"));
+	resultfields.push(new field("large", "silo"));
+	resultfields.push(new field("large", "building"));
 	for (i = 0; i < (bigfieldnum - 2); i++) {
-		resultfields.push(field("large", "irrigation"))
+		resultfields.push(new field("large", "irrigation"))
 	}
-	resultfields.push(field("large", "silo"));
-	resultfields.push(field("large", "building"));
+	resultfields.push(new field("large", "silo"));
+	resultfields.push(new field("large", "building"));
 	for (i = 0; i < (smallfieldnum - 2); i++) {
-		resultfields.push(field ("large", "irrigation"))
+		resultfields.push(new field ("large", "irrigation"))
 	}
 	return resultfields;
 
