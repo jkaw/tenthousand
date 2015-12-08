@@ -5,6 +5,7 @@ CircularList = require('circular-list');
 //Assignment = require('Assignment')
 
 var validGames = [];
+var PlayedFields = [];
 
 module.exports = {
 
@@ -49,8 +50,11 @@ module.exports = {
 		var new_game = new Game(the_game_id, listOfPlayers, turn_length, "NA", user_id);
 		console.log(the_game_id);
 		module.exports.validGames.push(new_game);
-		console.log(JSON.stringify(module.exports.validGames));
-		return the_game_id;
+		var ret = {};
+		ret.error = false;
+		ret.errors = [];
+		ret.game_id = the_game_id;
+		return ret;
 	},
 	/*****************************************/
 
@@ -107,9 +111,12 @@ module.exports = {
 		distribute_assignments_at_start(game_id);
 
 		var ret = {};
-		ret.error = "false";
+
+		ret.error = false;
 		ret.errors = [];
+
 		ret.players = findGame(game_id, validGames).listOfPlayers;
+
 		return ret;
 
 	},
@@ -124,8 +131,15 @@ module.exports = {
 
 	 returns null;
 	 */
-	from_api_player_is_done:function(incoming){
-		console.log("not implemented");
+	from_api_player_is_done:function(game_id, user_id, xy_coordinates, field_type, field_size) {
+		//console.log("not implemented");
+		var currentGame = findGame(game_id, validGames);
+		var ret = {};
+		var currentPlayer = findPlayer(currentGame, user_id);
+		removeField(field_type, field_size, currentPlayer, xy_coordinates);
+		ret.error = false;
+		ret.errors = [];
+		ret.playedfields = PlayedFields;
 	},
 
 	createCircularList:function(user_id){
@@ -165,13 +179,9 @@ var createFields = function(smallfieldnum, bigfieldnum) {
 };
 
 var distribute_fields = function(gameID){
-	console.log("at the start of distribute_fields: "+gameID);
-	console.log(JSON.stringify(module.exports.validGames));
 	var tempGame = findGame(gameID, module.exports.validGames);
 	var gameNum = findGameNum(gameID, module.exports.validGames);
-
 	//Creates a game object with each player having the starting amount of fields
-	console.log(JSON.stringify(tempGame));
 	if (tempGame.listOfPlayers.length === 2) {
 		tempGame.listOfPlayers[0] = new Player(findGame(gameID, validGames).listOfPlayers[0].playerID, createFields(8,7));
 		tempGame.listOfPlayers[1] = new Player(findGame(gameID, validGames).listOfPlayers[1].playerID, createFields(8,7));
@@ -201,14 +211,37 @@ var distribute_fields = function(gameID){
 	}
 };
 
+
+//RemoveField will remove the field played from the hand, and add it to the fields played array
+var removeField = function(fsize, ftype, player, xy) {
+	for (var i = 0; i < player.playerFields.length; i++) {
+		if (player.playerFields[i].size === fsize
+			&& player.playerFields[i].type === ftype) {
+			PlayedFields.push(new Field(fsize, ftype, xy));
+			player.playerFields.splice(i, 1);
+		}
+		else return null;
+	}
+};
+
+var findPlayer = function(game, cplayerid) {
+	for (var i = 0; i < game.listOfPlayers.length; i++) {
+		if (game.listOfPlayers[i].playerID === cplayerid) {
+			return game.listOfPlayers[i]
+		}
+		else {
+		}
+	}
+};
+
 var findGame = function(gameID, GameArray) {
 	//This will find the game object in the game array given the id.
-	for (var i = 0; i < GameArray.length; i++) {
-		console.log(JSON.stringify(GameArray[i]));
+	for (var i = 0; i < GameArray.length; i ++) {
 		if (GameArray[i].gameID === gameID) {
 			return GameArray[i];
 		}
-		//else return null;
+		else {
+		}
 	}
 };
 
@@ -218,11 +251,12 @@ var findGameNum = function(gameID, GameArray) {
 		if (GameArray[i] === gameID) {
 			return i;
 		}
-		//else return null;
+		else {
+		}
 	}
 };
 
-get_valid_assignments = function(game_id){
+var get_valid_assignments = function(game_id){
 	var currentGame = findGame(game_id);
 	var validAssignments = [];
 	for(var i = 0; i < currentGame.get_assignments(); i++){
@@ -249,6 +283,7 @@ var call_get_time = function() {
 };
 
 var sysCurrentTime = call_get_time();
+
 
 //creates new Field object
 function Field(size, type, x, y) {
@@ -286,16 +321,6 @@ function Player(playerID) {
 	this.playerAssignments = [];
 }
 
-
-function get_player(targetPlayerID, gameID) {
-	var theGame = findGame(gameID, validGames);
-	for(var i = 0; i < theGame.listOfPlayers.size; i++){
-		if(theGame.listOfPlayers[i].playerID == targetPlayerID){
-			return theGame.listOfPlayers[i];
-		}
-	}
-	return null;
-}
 
 function get_current_player(gameID) {
 	var theGame = findGame(gameID, validGames);
@@ -1027,53 +1052,3 @@ console.log("Number of valid large fields: "
 
  */
 
-
-
-
-/* Commenting out so we can compile -djp3
-
-
- //var name should be gameID with all dashes replaced with underscores
- var xxxxxxxx_xxxx_xxxx_xxxx_xxxxxxxxxxxx = new Game("xxxxxxxx_xxxx_xxxx_xxxx_xxxxxxxxxxxx",
- "player1", ["player1", "player2", "player3", "player4", "player5"], 3.5, "NA", "player1");
-
- //var name should be gameID with all dashes replaced with underscores
- var yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy = new Game("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy",
- "player6", ["player6"], 5.0, "NA", "player6");
-
-
- call_create_ID.validGames.push("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy", ["player6"], 5.0, "NA", "player6");
- call_create_ID.validGames.push("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy");
- >>>>>>> f39b44b6c4419cae64cb49c8c85e2163860b220d
- console.log("Should be true: " + validate_ID_help("yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy"));
- //yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy.listOfPlayers.push("test player");
- joinGame("test player", yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
- console.log("Test players: " + yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy.listOfPlayers);
- //joinGame("new Player", yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy)
- advanceTurn(yyyyyyyy_yyyy_yyyy_yyyy_yyyyyyyyyyyy);
- */
-
-
-/*
-
- var player1 = new Player("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
- "Player 1", "red", true);
-
- var player2 = new Player("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
- "Player 2", "blue", false);
-
- var player3 = new Player("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
- "Player 3", "green", false);
-
- var player4 = new Player("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
- "Player 4", "yellow", false);
-
- var player5 = new Player("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
- "Player 5", "purple", false);
-
- //var names for players must be unique across all games
- //var names could be concatenation of gameID and playerID to allow two players of same IDs in different games
- var player6 = new Player("yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy",
- "Player 1", "red", true);
-
- */
