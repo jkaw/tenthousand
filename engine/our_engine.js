@@ -235,12 +235,13 @@ var distribute_fields = function(gameID){
 	}
 
 
-var RemoveField(fsize, ftype, player, xy) {
+var RemoveField = function(fsize, ftype, player, xy) {
 	//RemoveField will remove the field played from the hand, and add it to the fields played array
 for (i = 0; i < player.playerFields.length; i++) {
+	var tempfields = player.playerFields;
 	if (player.playerFields[i].size === fsize && player.playerFields[i].type === ftype)
 		PlayedFields.push(new Field(fsize, ftype, xy));
-		player.playerFields.splice(i,1);
+		player.playerFields = tempfields.splice(i,1);
 	}
 	else return null;
 }
