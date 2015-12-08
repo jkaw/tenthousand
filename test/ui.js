@@ -4,34 +4,51 @@ var assert = require('assert'),
     webdriver = require('selenium-webdriver');
 
 test.describe('10,000 over Iowa web page', function() {
-  test.it('should load', function() {
-    var driver = new webdriver.Builder().
-			withCapabilities(webdriver.Capabilities.chrome()).
-			build();
+	var driver;
 
-	driver.get('http://localhost:8080/ui/test.html');
+	before(function(){});
+	after(function(){});
 
-	driver.wait(function() {
- 		return driver.getTitle().then(function(title) {
-   			return title === '10,000 Over Iowa';
- 		});
-	}, 10000);
+	beforeEach(function(){
+    	driver = new webdriver.Builder().
+					withCapabilities(webdriver.Capabilities.chrome()).
+					build();
+	});
 
-    driver.quit();
-  });
+	afterEach(function(){
+		driver.quit();
+	});
+	
+	test.it('should load', function() {
+		driver.get('http://localhost:8080/ui/test.html');
+
+		driver.wait(function() {
+			return driver.getTitle().then(function(title) {
+   				return title === '10,000 Over Iowa';
+ 			});
+		}, 1500);
+
+	});
 });
 
 test.describe('api_ajax_get_time', function() {
-  test.it('should return test values', function() {
-    var driver = new webdriver.Builder().
-			withCapabilities(webdriver.Capabilities.chrome()).
-			build();
+	var driver;
 
-	/*webdriver.promise.controlFlow().on('uncaughtException', function(e) {
- 		console.error('Unhandled error: ' + e);
+	before(function(){});
+	after(function(){});
+
+	beforeEach(function(){
+    	driver = new webdriver.Builder().
+					withCapabilities(webdriver.Capabilities.chrome()).
+					build();
 	});
-	webdriver.promise.rejected(new Error(""+driver.quit()));
-	*/
+
+	afterEach(function(){
+		driver.quit();
+	});
+
+	test.it('should return test values', function() {
+
 	driver.get('http://localhost:8080/ui/test.html').then(function() {
 		driver.findElement(webdriver.By.css('div#api_ajax_get_time_box button')).then(function(button){
 			button.click().then(function(){
@@ -49,8 +66,6 @@ test.describe('api_ajax_get_time', function() {
 			});
 		});
 	});
-
-    driver.quit();
   });
 });
 
